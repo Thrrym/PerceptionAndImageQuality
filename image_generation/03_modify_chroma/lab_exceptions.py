@@ -1,0 +1,2 @@
+class LabValueOutOfBound(Exception):
+    pass
