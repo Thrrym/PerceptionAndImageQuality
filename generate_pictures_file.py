@@ -14,8 +14,11 @@ picture_path = "Pictures/"
 
 pictures_file = []
 
+max_height = 300
+max_width = 300
 
-# Takes and Str List and sorts it
+
+# Takes an Str List and sorts it
 def sorted_alphanumeric(data):
     convert = lambda text: int(text) if text.isdigit() else text.lower()
     alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
@@ -50,7 +53,11 @@ def getPictures():
 def resize(path, image):
     img = Image.open(path + image)
     width, height = img.size
-    # print(width, height)
+    ratio = min(max_width / width, max_height / height)
+    if height > 700:
+        ratio = 0.25
+    img = img.resize((int(img.size[0] * ratio), int(img.size[1] * ratio)), Image.ANTIALIAS)
+    '''
     if width < 600:
         img = img.resize((int(img.size[0] * 0.5), int(img.size[1] * 0.5)), Image.ANTIALIAS)
     elif height > 700 or width > 700:
@@ -58,6 +65,7 @@ def resize(path, image):
     else:
         img = img.resize((int(img.size[0] * 0.3), int(img.size[1] * 0.3)), Image.ANTIALIAS)
     # print(path + str(buntheit) + ".jpg")
+    '''
     img.save(path + image.split("_")[1] + ".jpg")
 
 

@@ -3,10 +3,9 @@
 
 
 import csv
-import datetime
 import sys
 import pyglet
-from pyglet import window, clock
+from pyglet import window
 from pyglet.window import key
 
 instructions = """
@@ -47,8 +46,6 @@ class Experiment(window.Window):
         # Csv writer für unsere Resultate
         self.rf = open("results.csv", "w", newline="")
         self.resultwriter = csv.writer(self.rf)
-        #header = ["Ordner", "Foto 0", "Foto 1", "Foto 2", "Foto 3", "Foto 4", "Foto 5", "Foto 6", "Foto 7", "Foto 8"]
-        #self.resultwriter.writerow(header)
 
         # liest Csv mit Bildern und befüllt die Arrays
         self.loaddesign()
@@ -69,8 +66,6 @@ class Experiment(window.Window):
                     picturetemp.append(img[1].strip("', "))
                 self.pictures_buntheit.append(bunttemp)
                 self.pictures.append(picturetemp)
-        # print(self.pictures_buntheit, "\n")
-        # print(self.pictures)
 
     def loadImages(self):
         """ Loads images of current trial """
@@ -80,8 +75,11 @@ class Experiment(window.Window):
         self.images = []
         for i in range(9):
             #ladet das korrekte Bild und speichert die x und y koordinaten
-            temp = pyglet.image.load(self.pictures[self.pictures_group][i])
-            self.images.append(temp)
+            try:
+                temp = pyglet.image.load(self.pictures[self.pictures_group][i])
+                self.images.append(temp)
+            except IndexError:
+                pyglet.app.exit()
 
     def update(self, dt):
         pass
@@ -102,10 +100,9 @@ class Experiment(window.Window):
             if self.debug:
                 print('experiment phase 1: going through the trials')
             # platziert die Bilder an den Positionen 1 bis 9
-            x = [[0.25, 0.8], [0.5, 0.8], [0.75, 0.8],
-                    [0.25, 0.5], [0.5, 0.5], [0.75, 0.5],
-                    [0.25, 0.2], [0.5, 0.2], [0.75, 0.2]]
-
+            x = [[0.2, 0.825], [0.5, 0.825], [0.8, 0.825],
+                 [0.2, 0.51], [0.5, 0.51], [0.8, 0.51],
+                 [0.2, 0.175], [0.5, 0.175], [0.8, 0.175]]
             if self.firstFrame:
                 # ladet die bilder in self.images
                 self.loadImages()
@@ -169,6 +166,7 @@ class Experiment(window.Window):
             self.firstFrame = True
             self.savetrial(resp=self.pictures_buntheit[self.pictures_group][8])
         # wird aufgerufen damit sich das Programm nach dem Keystroke updated
+
         self.dispatch_event("on_draw")
 
     # Kreiert Labels und packt sie unter die Bilder damit die Auswahl angenehmer ist fürs Auge.
@@ -176,7 +174,7 @@ class Experiment(window.Window):
         for i in range(0, 9):
             self.number = pyglet.text.Label("--- " + str(i + 1) + " ---",
                                               font_name="Arial", multiline=True,
-                                              font_size=25, x=int(self.width * arr[i][0]) + 400, y=int(self.height * arr[i][1]) - 130,
+                                              font_size=15, x=int(self.width * arr[i][0]) + 400, y=int(self.height * arr[i][1]) - 150,
                                               width=int(self.width * 0.75), color=(0, 0, 0, 255),
                                               anchor_x="center", anchor_y="center")
             self.number.draw()
@@ -199,5 +197,5 @@ class Experiment(window.Window):
 
 if __name__ == '__main__':
     win = Experiment(caption="Testumgebung",
-                     vsync=False, height=960, width=1200)
+                     vsync=False, height=1000, width=1200)
     pyglet.app.run()
