@@ -27,9 +27,10 @@ Seminar: Image quality and human visual perception, SoSe 2020, TU Berlin
 import csv
 import datetime
 import os
-import sys
 import pyglet
 import random
+import sys
+import time
 from pyglet import window
 from pyglet import clock
 from pyglet.window import key 
@@ -107,13 +108,10 @@ def read_design_csv(fname):
 ###############################################################################
 class Experiment(window.Window):
     
-
     def __init__(self, *args, **kwargs):
 
         #Let all of the arguments pass through
-        self.win = window.Window.__init__(self, *args, **kwargs)
-        
-        debug = False        
+        self.win = window.Window.__init__(self, *args, **kwargs)       
         
         clock.schedule_interval(self.update, 1.0/30) # update at FPS of Hz
         
@@ -136,9 +134,11 @@ class Experiment(window.Window):
         self.designfile = designfile
         
         # Results file - assigning filename
-        s = designfile.split('.')
-        s[-1] = '_results.csv'
-        self.resultsfile = ''.join(s)
+        if debug:
+            self.resultsfile = "results/DEBUGRESULT.csv"
+        else:
+            timestr = time.strftime("%Y%m%d-%H%M%S")
+            self.resultsfile = "results/result_" + timestr + ".csv"
         
         # opening the results file, writing the header
         self.rf = open(self.resultsfile, 'w')
@@ -179,8 +179,7 @@ class Experiment(window.Window):
     
     def on_draw(self):
         """ Executed when draws on the screen"""
-        
-        
+                
         # clear the buffer
         pyglet.gl.glClearColor(1.0, 1.0, 1.0, 1.0)
         self.clear()
