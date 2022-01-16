@@ -29,10 +29,14 @@ def sorted_alphanumeric(data):
 def getPictures():
     dirs = os.listdir(picture_path)
     for group in dirs:
+        print(group)
+        if group == "README.md":
+            break
         picturedir = sorted_alphanumeric(os.listdir(picture_path + group))
         pictures = []
         buntheit = 0
         for picture in picturedir:
+            print()
             if buntheit == 9:
                 continue
             path_help = picture_path + group + "/"
