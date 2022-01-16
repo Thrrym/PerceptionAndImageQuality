@@ -46,14 +46,17 @@ from pyglet.window import key
 
 
 instructions = """
-Rating experiment - Single stimulus assessment\n
-Press one number to indicate the color intesity of the picture where\n
-0 - is no color at all
-9 - is the greatest color intensity you can imagine\n
-Press ENTER to start
-Press ESC to exit """
+Bewerten Sie die Buntheit der Bilder.
+Drücken Sie eine Zahl, um die Intensität der Buntheit zu bewerten:\n
+0 - Das Bild hat keine Farben
+...
+bis
+...
+9 - Die höchste Intensität an Buntheit, die Sie sich vorstellen können\n
+Drücken Sie ENTER zum Starten
+Drücken Sie ESC zum Verlassen """
 
-instructions_ontrial = """ 0 - no color ... 9 - greatest color intensity """
+instructions_ontrial = """ 0 - keine Farben ... bis ... 9 - höchste Intensität an Buntheit """
 
 picture_file_names = []
 
@@ -381,7 +384,7 @@ if __name__ == "__main__":
 
     
     # for fullscreen, use fullscreen=True and give your correct screen resolution in width= and height=
-    win = Experiment(caption="Rating experiment - single stimulus assessment", 
+    win = Experiment(caption="Bunheitsbewertung", 
                      vsync=False, height=1080, width=1920, fullscreen=True)
     pyglet.app.run()
 
