@@ -26,6 +26,7 @@ Seminar: Image quality and human visual perception, SoSe 2020, TU Berlin
 
 import csv
 import datetime
+import os
 import sys
 import pyglet
 import random
@@ -54,21 +55,31 @@ Press ESC to exit """
 
 instructions_ontrial = """ 0 - no color ... 9 - greatest color intensity """
 
+picture_file_names = []
 
 ## stimulus presentation time variable
 #presentation_time = 1 # presentation time in seconds, None for unlimited presentation
 presentation_time = None
 
+def get_file_names():
+    files = os.listdir("data")
+
+    for file in files:
+        if(file.endswith(".JPG")):
+            picture_file_names.append(file)
+
+
 def generate_random_csv():
-        f = open('data/design_rating_single_random.csv', 'w', newline='')
-        writer = csv.writer(f)
-        writer.writerow(["test_image"])
-        r = random.sample(range(40), 40)
+    f = open('data/design_rating_single_random.csv', 'w', newline='')
+    writer = csv.writer(f)
+    writer.writerow(["test_image"])
+    file_count = len(picture_file_names)
+    random_numbers = random.sample(range(file_count), file_count)
 
-        for num in r:
-            writer.writerow(["data/" + str(num) + ".jpg"])
+    for random_number in random_numbers:
+        writer.writerow(["data/" + picture_file_names[random_number]])
 
-        f.close()
+    f.close()
 
 def read_design_csv(fname):
     """ Reads a CSV design file and returns it in a dictionary"""
@@ -148,6 +159,7 @@ class Experiment(window.Window):
 
     def loaddesign(self):
         """ Loads the design file specifications"""
+        get_file_names()
         generate_random_csv()
         self.design = read_design_csv(self.designfile)
 
@@ -260,8 +272,7 @@ class Experiment(window.Window):
     def savetrial(self, resp, resptime):
         """ Save the response of the current trial to the results file """
         
-        row = [self.design['test_image'][self.currenttrial],
-               resp, resptime]
+        row = [(self.design['test_image'][self.currenttrial]).split("/", 1)[1], resp, resptime]
         self.resultswriter.writerow(row)
         print('Trial %d saved' % self.currenttrial)
         
@@ -321,7 +332,7 @@ class Experiment(window.Window):
             self.currenttrial += 1
             self.checkcontinue()
 
-        elif (symbol == key.NUM_6 or symbol == key._6) and self.experimentphase==6:
+        elif (symbol == key.NUM_6 or symbol == key._6) and self.experimentphase==1:
             print("Press: 6")
             deltat = datetime.datetime.now() - self.stimstarttime
             self.savetrial(resp=6, resptime = deltat.total_seconds())
@@ -371,6 +382,6 @@ if __name__ == "__main__":
     
     # for fullscreen, use fullscreen=True and give your correct screen resolution in width= and height=
     win = Experiment(caption="Rating experiment - single stimulus assessment", 
-                     vsync=False, height=950, width=1850, fullscreen=False)
+                     vsync=False, height=1080, width=1920, fullscreen=True)
     pyglet.app.run()
 
