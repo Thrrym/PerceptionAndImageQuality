@@ -46,6 +46,8 @@ class Experiment(window.Window):
         # Csv writer für unsere Resultate
         self.rf = open("results.csv", "w", newline="")
         self.resultwriter = csv.writer(self.rf)
+        header = ["Bildergruppe", "1", "2", "3", "4", "5", "6", "7", "8", "9", "Auswahl"]
+        self.resultwriter.writerow(header)
 
         # liest Csv mit Bildern und befüllt die Arrays
         self.loaddesign()
@@ -190,7 +192,7 @@ class Experiment(window.Window):
         wahl = werte[resp]
         werte.sort()
         result.extend(werte)
-        result.append("Auswahl: " + wahl)
+        result.append(wahl)
         self.resultwriter.writerow(result)
         self.pictures_group += 1
 
