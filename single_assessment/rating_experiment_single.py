@@ -46,7 +46,7 @@ from pyglet.window import key
 
 
 instructions = """
-Bewerten Sie die Buntheit der Bilder.
+Wie empfinden Sie die Buntheit der Bilder.
 Drücken Sie eine Zahl, um die Intensität der Buntheit zu bewerten:\n
 0 - Das Bild hat keine Farben
 ...
@@ -59,6 +59,8 @@ Drücken Sie ESC zum Verlassen """
 instructions_ontrial = """ 0 - keine Farben ... bis ... 9 - höchste Intensität an Buntheit """
 
 picture_file_names = []
+
+debug = True
 
 ## stimulus presentation time variable
 #presentation_time = 1 # presentation time in seconds, None for unlimited presentation
@@ -76,11 +78,10 @@ def generate_random_csv():
     f = open('data/design_rating_single_random.csv', 'w', newline='')
     writer = csv.writer(f)
     writer.writerow(["test_image"])
-    file_count = len(picture_file_names)
-    random_numbers = random.sample(range(file_count), file_count)
+    random.shuffle(picture_file_names)
 
-    for random_number in random_numbers:
-        writer.writerow(["data/" + picture_file_names[random_number]])
+    for picture_file_name in picture_file_names:
+        writer.writerow(["data/" + picture_file_name])
 
     f.close()
 
@@ -112,8 +113,7 @@ class Experiment(window.Window):
         #Let all of the arguments pass through
         self.win = window.Window.__init__(self, *args, **kwargs)
         
-        self.debug = False
-        
+        debug = False        
         
         clock.schedule_interval(self.update, 1.0/30) # update at FPS of Hz
         
@@ -168,7 +168,7 @@ class Experiment(window.Window):
 
         self.totaltrials = len(self.design['test_image'])
         
-        if self.debug:
+        if debug:
             print(self.design)
             print('total number of trials: %d ' % self.totaltrials)
             
@@ -190,13 +190,13 @@ class Experiment(window.Window):
         #print(f"FPS is {clock.get_fps()}")
         
         
-        if self.debug:
+        if debug:
             print('-------- ondraw')
             print('self.present_stim %d' % self.present_stim)
         
         
         if self.experimentphase == 0:
-            if self.debug:
+            if debug:
                 print('experiment phase 0: welcome')
             # draws instruction text
             self.welcome_text.draw()
@@ -204,7 +204,7 @@ class Experiment(window.Window):
         # go through the trials 
         elif self.experimentphase == 1:
             
-            if self.debug:
+            if debug:
                 print('experiment phase 1: going through the trials')
             
             
@@ -239,7 +239,7 @@ class Experiment(window.Window):
                     self.present_stim = False
             
         elif self.experimentphase == 2:
-            if self.debug:
+            if debug:
                 print('experiment phase 2: goodbye')
             self.dispatch_event('on_close')  
             
@@ -261,7 +261,7 @@ class Experiment(window.Window):
     def load_images(self):
         """ Loads images of current trial """
         # load files 
-        if self.debug:
+        if debug:
             print('loading files')
             
         self.test_image = pyglet.image.load(self.design['test_image'][self.currenttrial])
@@ -364,7 +364,7 @@ class Experiment(window.Window):
             self.checkcontinue()
                 
         elif symbol == key.ENTER and self.experimentphase==0:
-            if self.debug:
+            if debug:
                 print("ENTER")
             self.experimentphase += 1
         
@@ -382,9 +382,12 @@ if __name__ == "__main__":
     else:
         designfile = 'data/design_rating_single_random.csv'
 
+    height = 900 if debug else 1080
+    width = 1800 if debug else 1920
+    fullscreen = not debug
     
     # for fullscreen, use fullscreen=True and give your correct screen resolution in width= and height=
     win = Experiment(caption="Bunheitsbewertung", 
-                     vsync=False, height=1080, width=1920, fullscreen=True)
+                     vsync=False, height=height, width=width, fullscreen=fullscreen)
     pyglet.app.run()
 
