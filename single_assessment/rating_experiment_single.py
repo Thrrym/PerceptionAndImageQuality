@@ -61,7 +61,7 @@ instructions_ontrial = """ 0 - keine Farben ... bis ... 9 - höchste Intensität
 
 picture_file_names = []
 
-debug = True
+debug = False
 
 ## stimulus presentation time variable
 #presentation_time = 1 # presentation time in seconds, None for unlimited presentation
