@@ -9,9 +9,9 @@ from pyglet import window
 from pyglet.window import key
 
 instructions = """
-Wähle aus den neuen Bilder jeweils das deiner Meinung nach beste aus.
+Wähle aus den neun Bildern das, deiner Meinung nach, beste aus.
 Beachte dabei besonders die Qualität der Farben. \n
-Drücke 1 - 9 auf deiner Tastatur um das beste Bild auszuwählen. (1 oben links, 9 unten rechts)\n
+Drücke 1 - 9 auf deiner Tastatur um deine Auswahl zu speichern. (1 oben links, 9 unten rechts)\n
 ENTER zum starten \n
 ESCAPE zum abbrechen"""
 
