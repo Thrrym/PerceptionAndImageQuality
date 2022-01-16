@@ -101,7 +101,7 @@ class Experiment(window.Window):
                 print('experiment phase 1: going through the trials')
             # platziert die Bilder an den Positionen 1 bis 9
             x = [[0.2, 0.825], [0.5, 0.825], [0.8, 0.825],
-                 [0.2, 0.51], [0.5, 0.51], [0.8, 0.51],
+                 [0.2, 0.5], [0.5, 0.5], [0.8, 0.5],
                  [0.2, 0.175], [0.5, 0.175], [0.8, 0.175]]
             if self.firstFrame:
                 # ladet die bilder in self.images
@@ -174,7 +174,7 @@ class Experiment(window.Window):
         for i in range(0, 9):
             self.number = pyglet.text.Label("--- " + str(i + 1) + " ---",
                                               font_name="Arial", multiline=True,
-                                              font_size=15, x=int(self.width * arr[i][0]) + 400, y=int(self.height * arr[i][1]) - 150,
+                                              font_size=15, x=int(self.width * arr[i][0]) + 400, y=int(self.height * arr[i][1]) - 160,
                                               width=int(self.width * 0.75), color=(0, 0, 0, 255),
                                               anchor_x="center", anchor_y="center")
             self.number.draw()

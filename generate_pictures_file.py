@@ -54,8 +54,10 @@ def resize(path, image):
     img = Image.open(path + image)
     width, height = img.size
     ratio = min(max_width / width, max_height / height)
+    """
     if height > 700:
         ratio = 0.25
+    """
     img = img.resize((int(img.size[0] * ratio), int(img.size[1] * ratio)), Image.ANTIALIAS)
     '''
     if width < 600:
