@@ -46,7 +46,7 @@ from pyglet.window import key
 
 
 instructions = """
-Bewerten Sie die Buntheit der Bilder.
+Wie empfinden Sie die Buntheit der Bilder.
 Drücken Sie eine Zahl, um die Intensität der Buntheit zu bewerten:\n
 0 - Das Bild hat keine Farben
 ...
