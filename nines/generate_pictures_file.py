@@ -14,8 +14,8 @@ picture_path = "Pictures/"
 
 pictures_file = []
 
-max_height = 300
-max_width = 300
+max_height = 400
+max_width = 400
 
 
 # Takes an Str List and sorts it

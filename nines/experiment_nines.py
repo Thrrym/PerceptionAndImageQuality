@@ -176,7 +176,7 @@ class Experiment(window.Window):
         for i in range(0, 9):
             self.number = pyglet.text.Label("--- " + str(i + 1) + " ---",
                                               font_name="Arial", multiline=True,
-                                              font_size=15, x=int(self.width * arr[i][0]) + 400, y=int(self.height * arr[i][1]) - 160,
+                                              font_size=15, x=int(self.width * arr[i][0]) + 400, y=int(self.height * arr[i][1]),
                                               width=int(self.width * 0.75), color=(0, 0, 0, 255),
                                               anchor_x="center", anchor_y="center")
             self.number.draw()
@@ -199,5 +199,5 @@ class Experiment(window.Window):
 
 if __name__ == '__main__':
     win = Experiment(caption="Testumgebung",
-                     vsync=False, height=1000, width=1200)
+                     vsync=False, height=1080, width=1920, fullscreen=True)
     pyglet.app.run()
