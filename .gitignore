@@ -4,6 +4,10 @@ single_assessment/results/DEBUGRESULT.csv
 
 single_assessment/data/design_rating_single_random.csv
 
+# nine assesssment
+
+nines/results/DEBUGRESULT.csv
+
 .vscode
 colorization-master/
 colorization/
