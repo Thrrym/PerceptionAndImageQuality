@@ -37,6 +37,7 @@ def recolor(path_to_directory, export_path, colorizer) -> list:
             path=export_path / f'{image.split("_")[0]}_structure.png')
         
         # Store average chroma value of the recolored image.
+        new_file_name = f'{image.split("_")[0]}_1.0_chroma.JPG'
         average_chroma_values.append([new_file_name, get_average_chroma_value(lab_converted_image)])
     
     return average_chroma_values
