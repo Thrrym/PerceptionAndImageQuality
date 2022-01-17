@@ -14,7 +14,7 @@ def get_average_chroma_value(lab_img) -> float:
     b_2 = np.power(lab_img[:, :, 2], 2)
     return np.median(np.sqrt(a_2 + b_2))
 
-def recolor(path_to_directory, export_path, colorizer):
+def recolor(path_to_directory, export_path, colorizer) -> list:
     """ Recolor a black and white picture with pre-trained ML algorithm. """
     image_file_names = os.listdir(path_to_directory)
     average_chroma_values = []
@@ -39,8 +39,7 @@ def recolor(path_to_directory, export_path, colorizer):
         # Store average chroma value of the recolored image.
         average_chroma_values.append([new_file_name, get_average_chroma_value(lab_converted_image)])
     
-    with open(Path('image_generation/02_recolor/average_chroma_values.pkl').absolute(), mode='wb') as json_file:
-        pickle.dump(average_chroma_values, json_file)
+    return average_chroma_values
 
 if __name__ == '__main__':
     directory_paths = [
@@ -57,5 +56,10 @@ if __name__ == '__main__':
     # Get the machine learning model.
     colorizer_siggraph17 = siggraph17(pretrained=True).eval()
 
+    average_chroma_values = []
     for path in directory_paths:
-        recolor(path, export_path=export_path, colorizer=colorizer_siggraph17)
+        average_chroma_values += recolor(path, export_path=export_path, colorizer=colorizer_siggraph17)
+
+    pkl_path = Path('image_generation/02_recolor/average_chroma_values.pkl').absolute()
+    with open(pkl_path, mode='wb') as pkl_file:
+        pickle.dump(average_chroma_values, pkl_file)
