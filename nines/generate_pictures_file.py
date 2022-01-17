@@ -14,8 +14,8 @@ picture_path = "Pictures/"
 
 pictures_file = []
 
-max_height = 400
-max_width = 400
+max_height = 300
+max_width = 600
 
 
 # Takes an Str List and sorts it
@@ -49,7 +49,7 @@ def getPictures():
     random.shuffle(pictures_file)
     print(pictures_file)
 
-    with open("pictures.csv", "w", newline="\n") as f:
+    with open("Pictures/pictures.csv", "w", newline="\n") as f:
         write = csv.writer(f)
         write.writerows(pictures_file)
 

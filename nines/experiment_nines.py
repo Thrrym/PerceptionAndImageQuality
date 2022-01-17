@@ -3,20 +3,25 @@
 
 
 import csv
-import sys
+
 import pyglet
 from pyglet import window
 from pyglet.window import key
 
+import sys
+import time
+
 instructions = """
-Wähle aus den neun Bildern das, deiner Meinung nach, beste aus.
-Beachte dabei besonders die Qualität der Farben. \n
-Drücke 1 - 9 auf deiner Tastatur um deine Auswahl zu speichern. (1 oben links, 9 unten rechts)\n
-ENTER zum starten \n
-ESCAPE zum abbrechen"""
+Sie werden immer neun Fotos des selben Motivs sehen. \n
+Auf welchem Foto empfinden Sie die Farben am realistischsten, also so, als würden Sie das Motiv in der Wirklichkeit selber sehen.\n
+Drücken Sie 1 - 9 auf Ihrer Tastatur um Ihre Auswahl zu speichern.\n
+\n
+Drücken Sie ENTER zum Starten \n
+Drücken Sie ESCAPE zum Abbrechen"""
 
-end = """ Vielen Dank fürs teilnehmen! """
+end = """ Vielen Dank für Ihre Teilnahme! """
 
+debug = False
 
 class Experiment(window.Window):
 
@@ -26,7 +31,6 @@ class Experiment(window.Window):
 
     def __init__(self, *args, **kwargs):
         self.win = window.Window.__init__(self, *args, **kwargs)
-        self.debug = False
 
         self.welcome_text = pyglet.text.Label(instructions,
                                               font_name="Arial", multiline=True,
@@ -43,8 +47,15 @@ class Experiment(window.Window):
         self.experimentPhase = 0
         self.firstFrame = True
 
+        # Results file - assigning filename
+        if debug:
+            filename = "results/DEBUGRESULT.csv"
+        else:
+            timestr = time.strftime("%Y%m%d-%H%M%S")
+            filename = "results/result_" + timestr + ".csv"
+            
         # Csv writer für unsere Resultate
-        self.rf = open("results.csv", "w", newline="")
+        self.rf = open(filename, "w", newline="")
         self.resultwriter = csv.writer(self.rf)
         header = ["Bildergruppe", "1", "2", "3", "4", "5", "6", "7", "8", "9", "Auswahl"]
         self.resultwriter.writerow(header)
@@ -56,7 +67,7 @@ class Experiment(window.Window):
 
     # liest die csv Datei aus
     def loaddesign(self):
-        with open("pictures.csv", "r") as f:
+        with open("Pictures/pictures.csv", "r") as f:
             reader = csv.reader(f)
             temp = list(reader)
             for i in temp:
@@ -72,7 +83,7 @@ class Experiment(window.Window):
     def loadImages(self):
         """ Loads images of current trial """
         # load files
-        if self.debug:
+        if debug:
             print('loading files')
         self.images = []
         for i in range(9):
@@ -93,13 +104,13 @@ class Experiment(window.Window):
 
         # Willkommensscreen
         if self.experimentPhase == 0:
-            if self.debug:
+            if debug:
                 print('experiment phase 0: welcome')
             self.welcome_text.draw()
 
         # User wählt Bilder aus mit numpad bzw. Zahlen 1-9
         elif self.experimentPhase == 1:
-            if self.debug:
+            if debug:
                 print('experiment phase 1: going through the trials')
             # platziert die Bilder an den Positionen 1 bis 9
             x = [[0.2, 0.825], [0.5, 0.825], [0.8, 0.825],
@@ -115,7 +126,7 @@ class Experiment(window.Window):
 
         # Ende des Versuchs
         elif self.experimentPhase == 2:
-            if self.debug:
+            if debug:
                 print('experiment phase 2: goodbye')
             sys.exit("Experiment erfolgreich durchgeführt!")
 
@@ -128,7 +139,7 @@ class Experiment(window.Window):
             self.dispatch_event('on_close')
         # Enter um vom Willkommen Screen weiter zu kommen
         elif symbol == key.ENTER and self.experimentPhase == 0:
-            if self.debug:
+            if debug:
                 print("ENTER")
             self.experimentPhase += 1
         # User wählt 1 aus
@@ -176,7 +187,7 @@ class Experiment(window.Window):
         for i in range(0, 9):
             self.number = pyglet.text.Label("--- " + str(i + 1) + " ---",
                                               font_name="Arial", multiline=True,
-                                              font_size=15, x=int(self.width * arr[i][0]) + 400, y=int(self.height * arr[i][1]),
+                                              font_size=15, x=int(self.width * arr[i][0]) + 700, y=int(self.height * arr[i][1]) - 170,
                                               width=int(self.width * 0.75), color=(0, 0, 0, 255),
                                               anchor_x="center", anchor_y="center")
             self.number.draw()
@@ -198,6 +209,12 @@ class Experiment(window.Window):
 
 
 if __name__ == '__main__':
+
+    height = 900 if debug else 1080
+    width = 1800 if debug else 1920
+    fullscreen = not debug
+
     win = Experiment(caption="Testumgebung",
-                     vsync=False, height=1080, width=1920, fullscreen=True)
+                     vsync=False, height=height, width=width, fullscreen=fullscreen)
+
     pyglet.app.run()
