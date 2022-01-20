@@ -3,6 +3,7 @@
 
 
 import csv
+import random
 
 import pyglet
 from pyglet import window
@@ -79,6 +80,10 @@ class Experiment(window.Window):
                     picturetemp.append(img[1].strip("', "))
                 self.pictures_buntheit.append(bunttemp)
                 self.pictures.append(picturetemp)
+            kombi = list(zip(self.pictures, self.pictures_buntheit))
+            random.shuffle(kombi)
+            self.pictures, self.pictures_buntheit = zip(*kombi)
+
 
     def loadImages(self):
         """ Loads images of current trial """
