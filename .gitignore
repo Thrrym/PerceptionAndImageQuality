@@ -1,5 +1,5 @@
 analysis/*.png
-
+analysis/*.pkl
 # single assessment
 
 single_assessment/results/DEBUGRESULT.csv
