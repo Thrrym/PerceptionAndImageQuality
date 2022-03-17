@@ -6,9 +6,9 @@
 
 ## 1. Einleitung
 
-Historische, schwarz-weiß Fotographien können unter Anderem mittels Machine Learning eingefärbt werden (rekoloriert). Wir untersuchen die Anpassung der Buntheit der eingefärbten Bilder. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus rekolorierter Bilder hat.
+Historische, schwarz-weiß Fotografien können unter anderem mittels Machine Learning eingefärbt werden (rekoloriert). Wir untersuchen die Anpassung der Buntheit der eingefärbten Bilder. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus rekolorierter Bilder hat.
 
-Zur Untersuchung der Fragestellung wurden historische und moderne Fotographien rekoloriert und nachträglich in ihrerer Buntheit manipuliert.
+Zur Untersuchung der Fragestellung wurden historische und moderne Fotografien rekoloriert und nachträglich in ihrerer Buntheit manipuliert.
 
 Wir haben die Hypothese untersucht, dass ein bunteres, rekoloriertes Bild, als realistischer wahrgenommen wird.
 
@@ -30,9 +30,9 @@ original_color_lab_image = color.rgb2lab(io.imread(file_path))
 ```
 
 ### Machine Learning Modell
-Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde duch Zhang et al. entwickelt [1]. Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im Training wurde ein Bild im CIELAB Frabraum, dessen Buntheitswerte a* und b* entfernt wurden, als Eingabe für das Modell verwendet. Der Output des Modells wurde mit dem originalen Bild, samt Buntheitswerten, verglichen. Basierend auf dem Vergleich erfolgte das Training des Modells.
+Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde duch Zhang et al. entwickelt [1]. Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im Training wurde ein Bild im CIELAB Farbraum, dessen Buntheitswerte a* und b* entfernt wurden, als Eingabe für das Modell verwendet. Der Output des Modells wurde mit dem originalen Bild, samt Buntheitswerten, verglichen. Basierend auf dem Vergleich erfolgte das Training des Modells.
 
-Mit dieser Methode ist es nicht möglich das Modell mit der historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntsheitswerten nicht möglich ist.
+Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntsheitswerten nicht möglich ist.
 
 
 ### Gewählte Bilder
