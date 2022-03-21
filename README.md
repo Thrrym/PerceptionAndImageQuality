@@ -13,7 +13,12 @@ Zur Untersuchung der Fragestellung wurden historische und moderne Fotografien re
 Wir haben die Hypothese untersucht, dass ein bunteres, rekoloriertes Bild, als realistischer wahrgenommen wird.
 
 ### Buntheit
-Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum ist die Buntheit von jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
+Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Allgemein ist Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe zu verstehen. Je mehr Schwarz- und Weißanteil in einer Farbe, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung im Farbtongleichen Dreieck [5]:
+
+![Farbtongleiches Dreieck](img_farb_dreieck.png)
+
+
+Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum ist die Buntheit von jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
 * L*: Helligkeit
 * a*: Rot-Grün-Buntheit
 * b*: Gelb-Blau-Buntheit
@@ -111,3 +116,5 @@ Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `c
 [3] Tampere Image Database. Besucht am 13.12.2021, https://www.ponomarenko.info/tid2013.htm.
 
 [4] Konica Minolta. Precise Color Communication. Besucht am 08.12.2021, https://www.konicaminolta.com/instruments/download/booklet/index.html.
+
+[5] Eva Lübbe. Farbempfindung, Farbbeschreibung und Farbmessung. 1. Auflage, Wiesbaden 2013.
