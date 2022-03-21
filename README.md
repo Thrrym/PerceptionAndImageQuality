@@ -6,25 +6,23 @@
 
 ## 1. Einleitung
 
-Historische Schwarz-Weiß-Fotografien können unter anderem mittels Machine Learning eingefärbt werden (rekoloriert). Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus rekolorierter Bilder hat.
+Historische Schwarz-Weiß-Fotografien können mittels Machine Learning nachträglich eingefärbt werden (rekoloriert). Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus rekolorierter Bilder hat.
 
 Zur Untersuchung der Fragestellung wurden historische und moderne Fotografien rekoloriert und nachträglich in ihrerer Buntheit manipuliert.
 
 Wir haben die Hypothese untersucht, dass ein bunteres, rekoloriertes Bild, als realistischer wahrgenommen wird.
 
 ### Buntheit
-Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma.
-
-Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum ist die Buntheit von jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
+Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum ist die Buntheit von jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
 * L*: Helligkeit
 * a*: Rot-Grün-Buntheit
 * b*: Gelb-Blau-Buntheit
 
-Die Buntheit kann mittels `C*_ab = sqrt((a*)² + (b*)²)` für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammhangs von a*, b* und der Buntheit im CIELAB Farbraums kann der folgenden Darstellungen entnommen werden [4]:
+Die Buntheit kann mittels `C*_ab = sqrt((a*)² + (b*)²)` für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [4]:
 
 ![CIELAB](img_lab.png)
 
-Farbraumkonvertierungen von sRGB zu CIELAB und umgekehrt wurden mittels des `skimage` Pakets für Python umgesetzt [2]:
+Farbraumkonvertierungen vom sRGB- zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python umgesetzt [2]:
 
 ```python
 from skimage import io, color
@@ -61,13 +59,13 @@ def modify_lab_image_chroma(chroma_factor, image_to_modify):
 Die Buntheit im CIELAB Farbraum kann beliebig angepasst werden. Jedoch ist ein Konvertierung dieser Werte in einen anderen Farbraum nur noch bedingt möglich. Gerade für die Darstellung auf Computerbildschirmen ist eine Konvertierung in den sRGB-Farbraum notwendig. Entsprechend sieht auch das `skimage` Paket Limitierungen für die Konvertierung aus dem CIELAB Farbraum vor. So müssen a* und b* im Intervall [0, 100] in den reellen Zahlen liegen.
 
 ### Gewählte Bilder
-Es wurden Bilder in zwei Gruppen gewählt: Historische Bilder und moderne Bilder.
+Es wurden Bilder in zwei Gruppen ausgewählt: Historische und moderne Bilder.
 
 #### Historische Bilder
-Historische Bilder aus verschiedenen Quellen wurden zusammengetragen. Es wurden auf eine vielfältige 
+Es wurden 30 historische Bilder aus verschiedenen Quellen zusammengetragen. Es wurden auf eine vielfältige Auswahl unterschiedlicher Themen geachtet.
 
 #### Moderne Bilder
-Die Modernen Bilder stellen eine kleinere Kontrollgruppe da. Mit diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Bilder wurden aus thematischen Themen gewählt, die auch in der Gruppe der historischen Bildern zum Einsatz kommt.
+Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Bilder wurden aus thematischen Themen gewählt, die auch in der Gruppe der historischen Bildern zum Einsatz kommt.
 
 
 ### Machine Learning Modell
@@ -75,10 +73,7 @@ Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Mode
 
 Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntsheitswerten nicht möglich ist.
 
-
-
-
-## 2. Vorbereitung Stimuli
+## 2. Vorbereitung der Stimuli
 Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `code/image_generation`.
 
 * `00_base_images`
@@ -87,11 +82,11 @@ Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `c
 * `03_modify_chroma`
 * `04_completed_images`
 
-## 2. Experimentelles Design
+## 3. Experimentelles Design
 
 
 
-## 3. Ergebnisse
+## 4. Ergebnisse
 
 
 
@@ -100,7 +95,7 @@ Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `c
 
 
 
-## 4. Diskussion
+## 5. Diskussion
 
 
 
@@ -109,7 +104,7 @@ Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `c
 
 ### Offene Fragen
 
-### Referenzen
+## Referenzen
 [1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016.
 
 [2] scikit-image development team. Besucht am 21.03.2022, https://scikit-image.org/.
