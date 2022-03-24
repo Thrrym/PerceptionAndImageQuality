@@ -88,6 +88,22 @@ Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `c
 
 ## 3. Experimentelles Design
 
+Unseren Versuch haben wir in zwei verschiedene Experimente aufgeteilt. Einmal das Hauptexperiment „Neuner“ und das Kontrollexperiment „Single“.
+Die Testbilder werden mit der Python Anwendung `code/nines/generate_pictures_file.py` in die richtige Form und Größe gebracht, damit sie später bei den Versuchen benutzt werden können. Außerdem wird eine CVS Datei kreiert, welche der Neuner zur Nutzung der Bilder benötigt.
+
+### Neuner
+In unserem Hauptexperiment sehen Versuchspersonen jeweils dasselbe Bild in neun verschiedenen Buntheiten. Das originale Schwarz-Weiß-Bild ist in diesen Bildergruppen nicht vorhanden. Die Versuchsperson soll bei jeder Bildgruppe entscheiden welches Bild am realistischsten empfunden wird und mit einem Klick auf eine Zahl von eins bis neun die Entscheidung bestätigen.
+
+Es wurden insgesamt 45 Bilder gezeigt. Aufgeteilt wurden diese Bilder in 30 historische und 15 moderne. Die Bilder wurden in jedem Durchlauf zufällig angeordnet, so dass die Chance minimiert wird, das Versuchspersonen beeinflusst werden durch vorherige Durchläufe.
+
+Um selbst einen Versuch durchzuführen, müssen die Bilder im Pictures Ordner inklusive der `pictures.csv` gespeichert werden. Die Anwendung `code/nines/experiment_nines.py` kann dann gestartet werden. Diese liest `pictures.csv` aus und zeigt dem User die Bilder. Außerdem werden alle Eingaben des Users gespeichert und am Ende in einer CSV Datei im results Order gespeichert. Bei einem Neustart des Experiments werden die Bildergruppen wieder zufällig aneinandergereiht.
+
+### Single
+Bei unserem Kontrollexperiment wurde überprüft wie Bunt die Versuchspersonen das vom Algorithmus eingefärbte Bild empfinden. Hier haben wir für jede Bildergruppe lediglich ein Bild gezeigt und die Testperson sollte auf einer Skala von 0 (keine Farben) bis 9 (höchste Intensität an Buntheit) ihre Bewertung speichern.
+
+Die Daten, welche wir durch den Single-Versuch bekommen haben, konnten wir mit denen des Neuners kombinieren um interessante Schlüsse für unsere Hypothese zu ziehen.
+
+Zum starten des Kontrollexperiments müssen die Bilder, welche bewerten werden sollen, in den data Ordner. Die Anwendung `code/single_assessment/rating_experiment_single.py` zeigt der Testpersonen die Bilder in einer zufälligen Reihenfolge und speichert die Ergebnisse im result Order als CSV Datei.
 
 
 ## 4. Ergebnisse
