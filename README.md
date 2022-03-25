@@ -6,19 +6,19 @@
 
 ## 1. Einleitung
 
-Historische Schwarz-Weiß-Fotografien können mittels Machine Learning nachträglich eingefärbt werden (rekoloriert). Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus rekolorierter Bilder hat.
+Historische Schwarz-Weiß-Fotografien können mittels Machine Learning nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus rekolorierter Bilder hat.
 
 Zur Untersuchung der Fragestellung wurden historische und moderne Fotografien rekoloriert und nachträglich in ihrerer Buntheit manipuliert.
 
 Wir haben die Hypothese untersucht, dass ein bunteres, rekoloriertes Bild, als realistischer wahrgenommen wird.
 
 ### Buntheit
-Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Allgemein ist Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe zu verstehen. Je mehr Schwarz- und Weißanteil in einer Farbe, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung im Farbtongleichen Dreieck [5]:
+
+Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Allgemein ist Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe zu verstehen. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung im Farbtongleichen Dreieck [5]:
 
 ![Farbtongleiches Dreieck](img_farb_dreieck.png)
 
-
-Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum ist die Buntheit von jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
+Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum, auch L*a*b* Farbraum genannt, ist die Buntheit von jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
 * L*: Helligkeit
 * a*: Rot-Grün-Buntheit
 * b*: Gelb-Blau-Buntheit
@@ -26,6 +26,8 @@ Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum ko
 Die Buntheit kann mittels `C*_ab = sqrt((a*)² + (b*)²)` für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [4]:
 
 ![CIELAB](img_lab.png)
+
+Durch die Änderung der Buntheit (Chroma in der Abb.) wird der Farbton nicht verändert (Hue in der Abb.).
 
 Farbraumkonvertierungen vom sRGB- zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python umgesetzt [2]:
 
@@ -42,13 +44,19 @@ Eine entsprechende Matrix für das gesamte Bild kann wie folgt erstellt werden.
 
 ```python
 def get_modification_matrix(chroma_factor, requested_shape):
+    """ Get matrix for element wise multiplication in the request shape.
+    Usually the shape is equal to the shape of the original image
+    as provided by the ML algorithm. """
+    # Get the vector [1, f, f] with f as mod. factor.
     vector_to_multiply_elementwise = np.array([1, chroma_factor, chroma_factor])
+
+    # Return matrix in the desired shape.
     return np.tile(
         vector_to_multiply_elementwise[None][None], (requested_shape[0], requested_shape[1], 1)
     )
 ```
 
-Die elementweise Multiplikation erfolgt mittels der Funktion
+Die elementweise Multiplikation erfolgt mittels der Funktion `modify_lab_image_chroma()`:
 
 ```python
 def modify_lab_image_chroma(chroma_factor, image_to_modify):
