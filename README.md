@@ -18,7 +18,7 @@ Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Allgem
 
 ![Farbtongleiches Dreieck](img_farb_dreieck.png)
 
-Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum, auch L*a*b* Farbraum genannt, ist die Buntheit von jedem Bildpunkt berechnen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Farbraum die folgenden Informationen gespeichert:
+Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum, auch L*a*b* Farbraum genannt, ist die Buntheit von jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Farbraum die folgenden Informationen gespeichert:
 * L*: Helligkeit
 * a*: Rot-Grün-Buntheit
 * b*: Gelb-Blau-Buntheit
