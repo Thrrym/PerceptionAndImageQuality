@@ -6,11 +6,9 @@
 
 ## 1. Einleitung
 
-Historische Schwarz-Weiß-Fotografien können mittels Machine Learning nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus rekolorierter Bilder hat.
+Historische Schwarz-Weiß-Fotografien können mittels Machine Learning Algorithmen nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus der rekolorierter Bilder hat. Als Hypothese wird angenommen, dass ein bunteres Bild als realistischer wahrgenommen wird.
 
-Zur Untersuchung der Fragestellung wurden historische und moderne Fotografien rekoloriert und nachträglich in ihrerer Buntheit manipuliert.
-
-Wir haben die Hypothese untersucht, dass ein bunteres, rekoloriertes Bild, als realistischer wahrgenommen wird.
+Die Untersuchung erfolgt anhand von historisches und modernen Fotografien. Diese werden rekoloriert und Varianten unterschiedlicher Buntheit erstellt. Beobachtern wurde im Anschluss die Bilder in unterscheidlicher Buntheit gezeigt.
 
 ### Buntheit
 
