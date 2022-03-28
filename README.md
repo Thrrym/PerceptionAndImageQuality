@@ -228,6 +228,7 @@ dass die Versuchsperson Elvis vorher nur in schwarz und weiß kannte, welches da
 als realistischer empfindet. 
 
 ### Offene Fragen
+In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereiches eines Bild bunter gemacht werden, als andere Bereiche.
 
 ## Referenzen
 [1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016.
