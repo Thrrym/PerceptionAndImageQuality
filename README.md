@@ -141,7 +141,7 @@ In einem Fall mussten wir die Ergebnisse des "Single" Kontrollexperiments verwer
 Damit solche Missverständnisse vermieden werden können, wäre es sinnvoll eine kurze Erläuterung anhand eines Beispiels zum Experiment hinzuzufügen.
 
 In unseren Bildergruppen hatten wir außerdem bekannte Persönlichkeiten, wie zum Beispiel Elvis. Es könnte sein,
-dass die Versuchsperson Elvis vorher nur in Schwarz und Weiß kannte, welches dazu führen könnte, dass sie ein etwas unbunteres Bild
+dass die Versuchsperson Elvis vorher nur in Schwarz-Weiß kannte, welches dazu führen könnte, dass sie ein etwas unbunteres Bild
 als realistischer empfindet. 
 
 ### Offene Fragen
