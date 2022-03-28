@@ -231,7 +231,7 @@ als realistischer empfindet.
 In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereiches eines Bild bunter gemacht werden, als andere Bereiche.
 
 ## Referenzen
-[1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016.
+[1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016, [doi](https://doi.org/10.1007/978-3-319-46487-9_40).
 
 [2] scikit-image development team. Besucht am 21.03.2022, https://scikit-image.org/.
 
