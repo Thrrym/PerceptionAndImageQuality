@@ -4,6 +4,18 @@
 
 ### Seminar: Visuelle Wahrnehmung beim Menschen und Bildqualität - WiSe 2021/22
 
+## Inhaltsverzeichnis
+
+[1. Einleitung](#1-einleitung)
+
+[2. Vorbereitung der Stimuli](#2-vorbereitung-der-stimuli)
+
+[3. Experimentelles Design](#3-experimentelles-design)
+
+[4. Ergebnisse](#4-ergebnisse)
+
+[5. Diskussion](#5-diskussion)
+
 ## 1. Einleitung
 
 Historische Schwarz-Weiß-Fotografien können mittels Machine Learning Algorithmen nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus der rekolorierter Bilder hat. Als Hypothese wird angenommen, dass ein bunteres, nachträglich eingefärbtes Bild als realistischer wahrgenommen wird.
