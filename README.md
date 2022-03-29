@@ -293,10 +293,10 @@ Die Regressionsanlysen wurden zwar mit sehr kleinen Stichproben durchgeführt, g
 
 ![Historische Bilder - Vergleich](historic_images_compare.png)
 
-Bei dem ersten Diagramm geht es nur um die historischen Bilder.
+Bei dem ersten Diagramm geht es nur um die historischen Bilder.<br/>
 Auf der x-Achse sind die normierten arithmetischen Mittel der gewählten Chromawerte für jedes Bild aus dem Diagramm des Neuner-Experiments abgebildet.
 Auf der y-Achse befinden sich die arithmetischen Mittel der wahrgenommenen Buntheiten für jedes Bild aus dem Diagramm des Single-Experiments.
-Das Diagramm zeigt eine nicht signifikate, aber schwach ausgeprägte negative Korrelation mit einem Korrelationskoeffizienten von r = -0,3.
+Das Diagramm zeigt eine nicht signifikate, aber schwach ausgeprägte negative Korrelation mit einem Korrelationskoeffizienten von r = -0,3.<br/>
 Damit lässt sich sagen, je bunter ein Bild wahrgenommen wird, desto näher ist das ursprünglich vom Algorithmus eingefärbte Bild an dem, welches am realistischsten wahrgenommen wurde.
 
 Auf dem zweiten Diagramm sieht man das noch deutlicher.
