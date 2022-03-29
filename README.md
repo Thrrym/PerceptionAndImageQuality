@@ -4,49 +4,75 @@
 
 ### Seminar: Visuelle Wahrnehmung beim Menschen und Bildqualität - WiSe 2021/22
 
+## Inhaltsverzeichnis
+
+[1. Einleitung](#1-einleitung)
+
+[2. Vorbereitung der Stimuli](#2-vorbereitung-der-stimuli)
+
+[3. Experimentelles Design](#3-experimentelles-design)
+
+[4. Ergebnisse](#4-ergebnisse)
+
+[5. Diskussion](#5-diskussion)
+
 ## 1. Einleitung
 
-Historische Schwarz-Weiß-Fotografien können mittels Machine Learning nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus rekolorierter Bilder hat.
+Historische Schwarz-Weiß-Fotografien können mittels Machine Learning Algorithmen nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus der rekolorierter Bilder hat. Als Hypothese wird angenommen, dass ein bunteres, nachträglich eingefärbtes Bild als realistischer wahrgenommen wird.
 
-Zur Untersuchung der Fragestellung wurden historische und moderne Fotografien rekoloriert und nachträglich in ihrer Buntheit manipuliert.
-
-Wir haben die Hypothese untersucht, dass ein bunteres, rekoloriertes Bild, als realistischer wahrgenommen wird.
+Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese werden rekoloriert und neun Varianten unterschiedlicher Buntheit erstellt. Beobachtern wurde im Anschluss die Varianten der Bilder gezeigt und nach der "realistischsten" Variante gefragt.
 
 ### Buntheit
 
-Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Allgemein ist Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe zu verstehen. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterschied zur Sättigung im Farbtongleichen Dreieck [5]:
+Wir gehen zunächst auf den Begriff der Buntheit und den CIELAB Farbraum ein, der unter anderem die Manipulation der Buntheit erlaubt. 
+
+#### Allgemein
+
+Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier wird Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe verstanden. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung (nur Weißanteil) im Farbtongleichen Dreieck [5]:
 
 ![Farbtongleiches Dreieck](img_farb_dreieck.png)
 
-Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB Farbraum konvertiert. Im CIELAB Farbraum, auch L*a*b* Farbraum genannt, ist die Buntheit von jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Farbraum die folgenden Informationen gespeichert:
+#### CIELAB Farbraum
+
+Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB oder L* a* b* Farbraum konvertiert. Im CIELAB Farbraum ist die Buntheit von jeder Farbe bzw. Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
+
 * L*: Helligkeit
 * a*: Rot-Grün-Buntheit
 * b*: Gelb-Blau-Buntheit
 
-Die Buntheit kann mittels `C*_ab = sqrt((a*)² + (b*)²)` für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammenhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [4]:
+Die Buntheit kann mittels der Formel 
+
+![Cab Formel](img_cab_formel.png)
+
+für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [4]:
 
 ![CIELAB](img_lab.png)
 
-Durch die Änderung der Buntheit (Chroma in der Abb.) wird der Farbton nicht verändert (Hue in der Abb.).
+Die Abbildung zeigt, dass eine Änderung der Buntheit (Chroma in der Abb.) den  Farbton nicht beeinflusst (Hue in der Abb.). Wird die Buntheit eines Bildpunktes geändert, hat das keinen Einfluss auf den Farbton des Bildpunktes.
 
-Farbraumkonvertierungen vom sRGB- zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python umgesetzt [2]:
+Farbraumkonvertierungen vom sRGB- zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python 3 umgesetzt [2]. Hier die Umwandlung sRGB zu CIELAB:
 
 ```python
 from skimage import io, color
-original_color_lab_image = color.rgb2lab(io.imread(file_path))
+# Read image from path and perform conversion.
+
+lab_image = color.rgb2lab(io.imread(file_path))
 ```
 
-Die Manipulation der Buntheit eines Bildes im CIELAB Farbraum erfolgt durch elementweise Matrixmultiplikation. Die Einträge für einen Bildpunkt werden mit dem Vektor [1, f, f], mit f als Faktor, um den die Buntheit angepasst wird:
-* L*: Bleibt durch Multiplikation mit 1 unverändert.
+Die Manipulation der Buntheit eines Bildes im CIELAB Farbraum erfolgt durch elementweise Matrixmultiplikation. Die Einträge für einen Bildpunkt werden mit dem Vektor `[1, f, f]` elementweise multipliziert. Dabei ist f der Faktor, um den die Buntheit angepasst wird:
+* L* (Helligkeit): Bleibt durch Multiplikation mit 1 unverändert.
 * a* und b*: Beide Einträge werden durch die elementweise Multiplikation mit f angepasst.
 
 Eine entsprechende Matrix für das gesamte Bild kann wie folgt erstellt werden.
 
 ```python
+import numpy as np
+
 def get_modification_matrix(chroma_factor, requested_shape):
     """ Get matrix for element wise multiplication in the request shape.
     Usually the shape is equal to the shape of the original image
     as provided by the ML algorithm. """
+
     # Get the vector [1, f, f] with f as mod. factor.
     vector_to_multiply_elementwise = np.array([1, chroma_factor, chroma_factor])
 
@@ -69,30 +95,97 @@ def modify_lab_image_chroma(chroma_factor, image_to_modify):
 ```
 
 #### Hinweis zum CIELAB Farbraum
-Die Buntheit im CIELAB Farbraum kann beliebig angepasst werden. Jedoch ist ein Konvertierung dieser Werte in einen anderen Farbraum nur noch bedingt möglich. Gerade für die Darstellung auf Computerbildschirmen ist eine Konvertierung in den sRGB-Farbraum notwendig. Entsprechend sieht auch das `skimage` Paket Limitierungen für die Konvertierung aus dem CIELAB Farbraum vor. So müssen a* und b* im Intervall [0, 100] in den reellen Zahlen liegen.
+Die Buntheit im CIELAB Farbraum kann beliebig angepasst werden. Jedoch ist ein Konvertierung dieser Werte in einen anderen Farbraum nur noch bedingt möglich. Gerade für die Darstellung auf Computerbildschirmen ist eine Konvertierung in den sRGB-Farbraum notwendig. Entsprechend sieht auch das `skimage` Paket Limitierungen für die Konvertierung aus dem CIELAB Farbraum vor. So müssen a* und b* im Intervall [-100, 100] in den reellen Zahlen liegen. Es ergibt sich somit auch, dass die Buntheit im Intervall [0, 100] liegt.
 
-### Gewählte Bilder
-Es wurden Bilder in zwei Gruppen ausgewählt: Historische und moderne Bilder.
+#### Wahl der Buntheitsfaktoren
+Basierend auf den oben gezeigten Grenzen für die Manipulation der Buntheit sind die Faktoren für die Manipulation der Buntheit zu wählen. Die Varianten eines Bildes mit unterschiedlichen Buntheiten enthält in der vorliegenden Untersuchung immer:
+* Faktor 1,0: Buntheit des Bildes, wie durch den Algorithmus generiert (Original rekoloriertes Bild).
+* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Beobachtern auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert.
+* Faktor max: Basierend auf der höchsten Buntheit des gesamten original rekolorierten Bildes, der höchst mögliche Buntheitswert. Wie durch die folgende Funktion bestimmt:
+```python
+import numpy as np
+def get_max_chroma_factor(image_to_modify):
+    """Calculate max possible Chroma value."""
+    min_a = np.abs(np.amin(image_to_modify[:, :, 1]))
+    max_a = np.abs(np.amax(image_to_modify[:, :, 1]))
+    min_b = np.abs(np.amin(image_to_modify[:, :, 2]))
+    max_b = np.abs(np.amax(image_to_modify[:, :, 2]))
+    max_abs_value = max(min_a, max_a, min_b, max_b)
+    ab_abs_max = 99
+    return ab_abs_max / max_abs_value
+```
+* Die verbleibenden sieben Faktoren: Die weiteren Faktoren werden mittels Interpolation bestimmt. Die Bestimmung der Buntheitsfaktoren eines Bildes erfolgt in `03_modify_chroma/main.py` mittels Funktion `get_factors_between_min_max()` mit Eingabeparametern `min_value=0.6` für den kleinsten Faktor und `max_value` der berechnete maximal mögliche Buntheitswert:
 
-#### Historische Bilder
-Es wurden 30 historische Bilder aus verschiedenen Quellen zusammengetragen. Es wurden auf eine vielfältige Auswahl unterschiedlicher Themen geachtet.
+```python
+from scipy.interpolate import Akima1DInterpolator
+from scipy.optimize import curve_fit
+import numpy as np
 
-#### Moderne Bilder
-Die modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern dar. Mit diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Bilder wurden aus thematischen Themen gewählt, die auch in der Gruppe der historischen Bildern zum Einsatz kommt.
+def get_factors_between_min_max(min_value, max_value) -> list:
+    """Calculate chroma manipulation factors between min, 1.0 and max value."""
+    # 1. step: Get linear function between (min_value, 0) and (max_value, 8).
+    # Background: Needed to calculate the position of the factor == 1.0
+    def fit_func(x, a, b):
+        return a*x + b
+    popt, pcov = curve_fit(fit_func, [min_value, max_value], [0, 8])
 
+    # 2. step: Using three known factors (min, 1.0, max) fit interpolated function.
+    
+    # Get number of factor == 1. Needed to know position within the 9 factors.
+    # Example: Worst case max factor == 1 -> factor == 1 is the factor with index 8.
+    factor_num_1 = int(fit_func(1.0, *popt))
+    if factor_num_1 < 1.0:
+        factor_num_1 = 1.0
+    fixed_factors_y = [min_value, 1.0, max_value]
+    fixed_factors_x = [0, factor_num_1, 8]
+    calculated_function = Akima1DInterpolator(fixed_factors_x, fixed_factors_y)
+
+    # 3. step: Calculate nine chroma factors:
+    x_range = np.arange(9)
+    return list(calculated_function(x_range))
+```
+
+Im Ergbnis erhalten wir Buntkeitsfaktoren für jedes Bild mit festen Faktoren, hier am Beispiel für Bild `I04`:
+
+![Faktoren](I04_chroma_factors.png)
 
 ### Machine Learning Modell
-Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde durch Zhang et al. entwickelt [1]. Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im Training wurde ein Bild im CIELAB Farbraum, dessen Buntheitswerte a* und b* entfernt wurden, als Eingabe für das Modell verwendet. Der Output des Modells wurde mit dem originalen Bild, samt Buntheitswerten, verglichen. Basierend auf dem Vergleich erfolgte das Training des Modells.
+
+Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde duch Zhang et al. entwickelt [1]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
+
+```python
+from colorization.colorizers import *
+
+# Recolor steps:
+(tens_l_orig, tens_l_rs) = preprocess_img(img, HW=(256,256))
+out_img = postprocess_tens(tens_l_orig, colorizer(tens_l_rs).cpu())
+```
+
+Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im Training wurde ein Bild im CIELAB Farbraum, dessen Buntheitswerte a* und b* entfernt wurden, als Eingabe für das Modell verwendet. Der Output des Modells wurde mit dem originalen Bild, samt Buntheitswerten, verglichen. Basierend auf dem Vergleich erfolgte das Training des Modells, wie in dieser Abbildung gezeigt [1]:
+
+![ML Training](img_ml_training.png)
+
 
 Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntheitswerten nicht möglich ist.
 
 ## 2. Vorbereitung der Stimuli
-Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `code/image_generation`. Die nachfolgenden Schritte sind auszuführen zur Erstellung der Stimuli.
+
+### Auswahl der Bilder
+Es wurden historische und moderne Bilder gewählt. Es dabei wurden 30 historische Bilder aus verschiedenen Quellen zusammengetragen. Das Augenmerk lag darauf, möglichst vielfältige Themen abzudecken. So sind z.B. Architektur-, Landschafts- und Portraitaufnahmen vertreten.
+
+Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Themen der Bilder entsprechen den Themen der historischen Bilder.
+
+### Ablauf der Erstellung
+
+Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `code/image_generation`. Die nachfolgenden Schritte sind auszuführen zur Erstellung der Stimuli. Jede Datei ist nur einmal auszuführen. Alle Bilddateien in den jeweiligen Ordnern werden jeweils abgearbeitet.
 
 * `00_base_images`: Ordner mit den ursprünglichen Bildern. Hier liegen die modernen Bilder noch als farbige Version vor.
 * `01_conversion_modern_images_to_to_bw`: Mit Ausführung von `create_bw_colors.py` werden ausschließlich von den modernen Bildern aus `00_base_images/modern` in schwarz-weiße-Bilder umgewandelt. Die Bilder werden hierzu in den CIELAB-Farbraum konvertiert. Die Buntheitswerte der Bildpunkte werden im Anschluss auf 0 gesetzt. Zum Abschluss werden die Bilder im Unterordner `export` gespeichert.
-* `02_recolor`: Zur Rekolorierung der historischen und modernen Bilder `recolor.py` ausführen. Der oben vorgestellte Machine Learning Algorithmus wird verwendet. Resultierende Bilder werden im Unterordner `export` gespeichert.
-* `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergehenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert.
+* `02_recolor`: Zur Rekolorierung der historischen und modernen Bilder `recolor.py` ausführen. Der oben vorgestellte Machine Learning Algorithmus wird verwendet. Die resultierende Bilder werden im Unterordner `export` gespeichert.
+* `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert. Eine Beispielübersicht mit den angewandten Faktoren für die Anpassung der Buntheit:
+
+![Beispiel Übersicht](img_overview.png)
+
 
 ## 3. Experimentelles Design
 
@@ -145,9 +238,10 @@ dass die Versuchsperson Elvis vorher nur in Schwarz-Weiß kannte, welches dazu f
 als realistischer empfindet. 
 
 ### Offene Fragen
+In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereiches eines Bild bunter gemacht werden, als andere Bereiche.
 
 ## Referenzen
-[1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016.
+[1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016, [doi](https://doi.org/10.1007/978-3-319-46487-9_40).
 
 [2] scikit-image development team. Besucht am 21.03.2022, https://scikit-image.org/.
 
