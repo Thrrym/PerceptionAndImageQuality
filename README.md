@@ -24,6 +24,8 @@ Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese
 
 ### Buntheit
 
+Wir gehen zunächst auf den Begriff der Buntheit und den CIELAB Farbraum ein, der unter Anderem die Manipulation der Buntheit erlaubt. 
+
 #### Allgemein
 
 Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier wird Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe verstanden. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung (nur Weißanteil) im Farbtongleichen Dreieck [5]:
