@@ -213,7 +213,7 @@ Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden s
 
 ## 4. Ergebnisse
 
-Nachdem eine befragte Person an dem Neuener Experiment teilgenommen hat, könnte das Ergebnis für die historischen Bilder exemplarisch folgendermaßen aussehen:
+Nachdem eine befragte Person an dem Neuner Experiment teilgenommen hat, könnte das Ergebnis für die historischen Bilder exemplarisch folgendermaßen aussehen:
 
 ![Neuner - Ergebnisse einer Versuchsperson](niner_assessment_single_observer.png)
 
@@ -242,23 +242,33 @@ H11 dagegen wurde als das Bild bewertet, bei dem der Algorithmus die realistisch
 
 Für die modernen Bilder konnten wir ein ganz ähnliches Ergebnis erzielen.
 
+![Neuner - Moderne Bilder - Versuchsergebnisse](niner_assessment_modern_images.png)
+
 Auch hier wählten die Versuchspersonen im Median meistens buntere Versionen, als die von Algorithmus generiert.
 
 Zu den interessantesten Sonderfällen zählen hier I08, welches am unrealistischsten wahrgenommen wurde.
+
+![I08 - 1.0](I08_1.0_chroma.JPG)
+
 Hier haben die Probanden eher diese Version als realistisch empfunden.
+
+![I08 - 3.21](I08_3.21_chroma.JPG)
 
 Das realistischste Bild ist I06 bei dem der Median genau auf dem Bild liegt, welches vom Algorithmus erzeugt wurde.
 
+![H06 - 1.0](I06_1.0_chroma.JPG)
+
 Als Ausreißer kann man an dieser Stelle noch I23 ansprechen. Bei diesem Bild habe die Versuchspersonen eine unbuntere Version als realistischer empfunden, als das vom Algorithmus generierte.
 
+![I23 - 1.0](I23_1.0_chroma.JPG)
+
 Im folgenden Diagramm sieht man die vereinigten Ergebnisse für die modernen und die historischen Bilder nebeneinander.
+
+![Neuner - Vergleich der Bildgruppen](niner_assessment_image_types.png)
+
 Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Testpersonen als die realistischste wahrgenommen zu werden.
 
 Ein t-Test zeigt hierbei einen signifikanten Unterschied zwischen den beiden Bildgruppen.
-
-Man sieht, dass die modernen Bilder generell als bunter wahrgenommen werden als die historischen.
-Auch hier zeigt ein t-Test einen signifikanten Unterschied.
-
 
 
 ## 5. Diskussion
