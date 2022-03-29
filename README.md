@@ -213,6 +213,8 @@ Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden s
 
 ## 4. Ergebnisse
 
+### Neuner - Historische Bilder
+
 Nachdem eine befragte Person an dem Neuner Experiment teilgenommen hat, könnte das Ergebnis für die historischen Bilder exemplarisch folgendermaßen aussehen:
 
 ![Neuner - Ergebnisse einer Versuchsperson](niner_assessment_single_observer.png)
@@ -240,6 +242,8 @@ H11 dagegen wurde als das Bild bewertet, bei dem der Algorithmus die realistisch
 
 ![H11 - 1.0](H11_1.0_chroma.JPG)
 
+### Neuner - Moderne Bilder
+
 Für die modernen Bilder konnten wir ein ganz ähnliches Ergebnis erzielen.
 
 ![Neuner - Moderne Bilder - Versuchsergebnisse](niner_assessment_modern_images.png)
@@ -262,6 +266,8 @@ Als Ausreißer kann man an dieser Stelle noch I23 ansprechen. Bei diesem Bild ha
 
 ![I23 - 1.0](I23_1.0_chroma.JPG)
 
+### Neuner - Vergleich der Bildgruppen
+
 Im folgenden Diagramm sieht man die vereinigten Ergebnisse für die modernen und die historischen Bilder nebeneinander.
 
 ![Neuner - Vergleich der Bildgruppen](niner_assessment_image_types.png)
@@ -269,6 +275,17 @@ Im folgenden Diagramm sieht man die vereinigten Ergebnisse für die modernen und
 Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Testpersonen als die realistischste wahrgenommen zu werden.
 
 Ein t-Test zeigt hierbei einen signifikanten Unterschied zwischen den beiden Bildgruppen.
+
+### Single - Vergleich der Bildgruppen
+
+Bei dem Kontrollexperiment sind wir ähnlich vorgegangen. Der Vergleich der Bildgruppen zeigt hier Folgendes:
+
+![Single - Vergleich der Bildgruppen](single_assessment_image_types.png)
+
+Man sieht, dass die modernen Bilder generell als bunter wahrgenommen werden als die historischen.
+Auch hier zeigt ein t-Test einen signifikanten Unterschied.
+
+### Zusammenführung der Versuchsergebnisse
 
 
 ## 5. Diskussion
