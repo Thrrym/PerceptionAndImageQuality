@@ -24,7 +24,7 @@ Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese
 
 ### Buntheit
 
-Wir gehen zunächst auf den Begriff der Buntheit und den CIELAB Farbraum ein, der unter Anderem die Manipulation der Buntheit erlaubt. 
+Wir gehen zunächst auf den Begriff der Buntheit und den CIELAB Farbraum ein, der unter anderem die Manipulation der Buntheit erlaubt. 
 
 #### Allgemein
 
@@ -148,10 +148,6 @@ Im Ergbnis erhalten wir Buntkeitsfaktoren für jedes Bild mit festen Faktoren, h
 
 ![Faktoren](I04_chroma_factors.png)
 
-### Gewählte Bilder
-Es wurden historische und moderne Bilder gewählt. Es wurden 30 historische Bilder aus verschiedenen Quellen zusammengetragen. Es wurde auf eine vielfältige Auswahl unterschiedlicher Themen der Bilder geachtet.
-Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Bilder wurden aus thematischen Themen gewählt, die auch in der Gruppe der historischen Bildern zum Einsatz kommen.
-
 ### Machine Learning Modell
 Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde duch Zhang et al. entwickelt [1]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
 
@@ -170,6 +166,14 @@ Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im
 Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntsheitswerten nicht möglich ist.
 
 ## 2. Vorbereitung der Stimuli
+
+### Auswahl der Bilder
+Es wurden historische und moderne Bilder gewählt. Es dabei wurden 30 historische Bilder aus verschiedenen Quellen zusammengetragen. Das Augenmerk lag darauf, möglichst vielfältige Themen abzudecken. So sind z.B. Architektur-, Landschafts- und Portraitaufnahmen vertreten.
+
+Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Themen der Bilder entsprechen den Themen der historischen Bilder.
+
+### Ablauf der Erstellung
+
 Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `code/image_generation`. Die nachfolgenden Schritte sind auszuführen zur Erstellung der Stimuli. Jede Datei ist nur einmal auszuführen. Alle Bilddateien in den jeweiligen Ordnern werden jeweils abgearbeitet.
 
 * `00_base_images`: Ordner mit den ursprünglichen Bildern. Hier liegen die modernen Bilder noch als farbige Version vor.
