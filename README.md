@@ -220,7 +220,7 @@ Nachdem eine befragte Person an dem Neuner Experiment teilgenommen hat, könnte 
 ![Neuner - Ergebnisse einer Versuchsperson](niner_assessment_single_observer.png)
 
 Auf der x-Achse sind hier die Bild-IDs abgebildet und auf der y-Achse der normierte gewählte Chromafaktor.
-Bei Chromafaktor 0.0 befindet sich eine blaue Linie. Diese symbolisiert den Chromawert, mit dem das Bild vom Algorithmus eingefärbt wurde.
+Bei Chromafaktor 0.0 befindet sich eine waagerechte blaue Linie. Diese symbolisiert den Chromawert, mit dem das Bild vom Algorithmus eingefärbt wurde.
 Die Punkte in dem Diagramm zeigen dann für die Antworten der Testperson.
 
 Von uns wurden so 23 Versuchspersonen befragt und die Ergebnisse sind im folgenden Diagramm zusammengetragen.
@@ -269,10 +269,11 @@ Als Ausreißer kann man an dieser Stelle noch I23 ansprechen. Bei diesem Bild ha
 ### Neuner - Vergleich der Bildgruppen
 
 Im folgenden Diagramm sieht man die vereinigten Ergebnisse für die modernen und die historischen Bilder nebeneinander.
+Dafür wurden die normierten arithmetischen Mittel jedes Bildes benutzt und daraus die Boxplots erstellt.
 
 ![Neuner - Vergleich der Bildgruppen](niner_assessment_image_types.png)
 
-Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Testpersonen als die realistischste wahrgenommen zu werden.
+Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Testpersonen als die realistischsten wahrgenommen zu werden.
 
 Ein t-Test zeigt hierbei einen signifikanten Unterschied zwischen den beiden Bildgruppen.
 
@@ -287,6 +288,23 @@ Auch hier zeigt ein t-Test einen signifikanten Unterschied.
 
 ### Zusammenführung der Versuchsergebnisse
 
+Um die Ergebnisse der beiden Versuche nun zusammen zu führen wurden folgende Diagramme erstellt.
+Die Regressionsanlysen wurden zwar mit sehr kleinen Stichproben durchgeführt, geben aber trotzdem eine grobe Tendenz der Zusammenhänge.
+
+![Historische Bilder - Vergleich](historic_images_compare.png)
+
+Bei dem ersten Diagramm geht es nur um die historischen Bilder.
+Auf der x-Achse sind die normierten arithmetischen Mittel der gewählten Chromawerte für jedes Bild aus dem Diagramm des Neuner-Experiments abgebildet.
+Auf der y-Achse befinden sich die arithmetischen Mittel der wahrgenommenen Buntheiten für jedes Bild aus dem Diagramm des Single-Experiments.
+Das Diagramm zeigt eine nicht signifikate, aber schwach ausgeprägte negative Korrelation mit einem Korrelationskoeffizienten von r = -0,3.
+Damit lässt sich sagen, je bunter ein Bild wahrgenommen wird, desto näher ist das ursprünglich vom Algorithmus eingefärbte Bild an dem, welches am realistischsten wahrgenommen wurde.
+
+Auf dem zweiten Diagramm sieht man das noch deutlicher.
+
+![Moderne Bilder - Vergleich](modern_images_compare.png)
+
+Bei diesem Diagramm handelt es sich um die gleiche Herangehensweise, wie bei dem Diagramm zuvor, nur das hier die historischen Bilder zur Grundlage genommen wurden.
+Hier sieht man sogar einen signifikanten negativen Zusammenhang mit einem Korrelationskoeffizienten von r = -6.
 
 ## 5. Diskussion
 Im Rahmen unseres Seminarprojekts haben die Auswertungen unserer Experimente gezeigt, dass Buntheit einen positiven Einfluss auf den wahrgenommenen Realismus hat. Anfänglich sind wir davon ausgegangen, dass wenn ein nachträglich eingefärbtes Bild bunter ist, es als realistischer wahrgenommen wird. Diese Erwartung hat sich nach den gewonnenen Erkenntnissen als wahr herausgestellt, jedoch nicht uneingeschränkt. Wir können zwar die Buntheit eines Bildes beliebig viel hochdrehen, aber ab einem bestimmten Punkt wird das Bild extrem unrealistisch, da die Farben ziemlich grell werden.
