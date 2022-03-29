@@ -248,7 +248,7 @@ Für die modernen Bilder konnten wir ein ganz ähnliches Ergebnis erzielen.
 
 ![Neuner - Moderne Bilder - Versuchsergebnisse](niner_assessment_modern_images.png)
 
-Auch hier wählten die Versuchspersonen im Median meistens buntere Versionen, als die von Algorithmus generiert.
+Auch hier wählten die Versuchspersonen im Median meistens buntere Versionen, als die vom Algorithmus generiert.
 
 Zu den interessantesten Sonderfällen zählen hier I08, welches am unrealistischsten wahrgenommen wurde.
 
