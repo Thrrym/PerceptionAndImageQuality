@@ -213,10 +213,51 @@ Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden s
 
 ## 4. Ergebnisse
 
+Nachdem eine befragte Person an dem Neuener Experiment teilgenommen hat, könnte das Ergebnis für die historischen Bilder exemplarisch folgendermaßen aussehen:
 
+![Neuner - Ergebnisse einer Versuchsperson](niner_assessment_single_observer.png)
 
+Auf der x-Achse sind hier die Bild-IDs abgebildet und auf der y-Achse der normierte gewählte Chromafaktor.
+Bei Chromafaktor 0.0 befindet sich eine blaue Linie. Diese symbolisiert den Chromawert, mit dem das Bild vom Algorithmus eingefärbt wurde.
+Die Punkte in dem Diagramm zeigen dann für die Antworten der Testperson.
 
-### Qualitative Beobachtungen
+Von uns wurden so 23 Versuchspersonen befragt und die Ergebnisse sind im folgenden Diagramm zusammengetragen.
+
+![Neuner - Historische Bilder - Versuchsergebnisse](niner_assessment_historic_images.png)
+
+Es wurde schnell deutlich, dass für jedes Bild der Median der gewünschten Chromawerte über dem vom Algorithmus generierten Chromawert liegt.
+Das bedeutet, dass sich die Versuchspersonen im Median eine buntere Version des Bildes als realistischster empfinden, als das Bild, das von Algorithmus generiert wurde.
+
+Die zwei Bilder, die am weitesten außen des Antwortspektrums liegen, sind folgende:
+
+![H25 - 1.0](H25_1.0_chroma.JPG)
+
+H25 wurde als das unrealistische Bild wahrgenommen. Hier halten die Versuchspersonen im Median folgende Version als am realistischsten:
+
+![H25 - 2.13](H25_2.13_chroma.JPG)
+
+H11 dagegen wurde als das Bild bewertet, bei dem der Algorithmus die realistischste Version generiert hat.
+
+![H11 - 1.0](H11_1.0_chroma.JPG)
+
+Für die modernen Bilder konnten wir ein ganz ähnliches Ergebnis erzielen.
+
+Auch hier wählten die Versuchspersonen im Median meistens buntere Versionen, als die von Algorithmus generiert.
+
+Zu den interessantesten Sonderfällen zählen hier I08, welches am unrealistischsten wahrgenommen wurde.
+Hier haben die Probanden eher diese Version als realistisch empfunden.
+
+Das realistischste Bild ist I06 bei dem der Median genau auf dem Bild liegt, welches vom Algorithmus erzeugt wurde.
+
+Als Ausreißer kann man an dieser Stelle noch I23 ansprechen. Bei diesem Bild habe die Versuchspersonen eine unbuntere Version als realistischer empfunden, als das vom Algorithmus generierte.
+
+Im folgenden Diagramm sieht man die vereinigten Ergebnisse für die modernen und die historischen Bilder nebeneinander.
+Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Testpersonen als die realistischste wahrgenommen zu werden.
+
+Ein t-Test zeigt hierbei einen signifikanten Unterschied zwischen den beiden Bildgruppen.
+
+Man sieht, dass die modernen Bilder generell als bunter wahrgenommen werden als die historischen.
+Auch hier zeigt ein t-Test einen signifikanten Unterschied.
 
 
 
