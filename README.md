@@ -35,6 +35,7 @@ Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier w
 #### CIELAB Farbraum
 
 Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIELAB oder L* a* b* Farbraum konvertiert. Im CIELAB Farbraum ist die Buntheit von jeder Farbe bzw. Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
+
 * L*: Helligkeit
 * a*: Rot-Grün-Buntheit
 * b*: Gelb-Blau-Buntheit
@@ -149,6 +150,7 @@ Im Ergbnis erhalten wir Buntkeitsfaktoren für jedes Bild mit festen Faktoren, h
 ![Faktoren](I04_chroma_factors.png)
 
 ### Machine Learning Modell
+
 Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde duch Zhang et al. entwickelt [1]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
 
 ```python
@@ -163,7 +165,8 @@ Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im
 
 ![ML Training](img_ml_training.png)
 
-Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntsheitswerten nicht möglich ist.
+
+Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntheitswerten nicht möglich ist.
 
 ## 2. Vorbereitung der Stimuli
 
@@ -182,6 +185,7 @@ Wir beschreiben die Erstellung der Stimuli und beziehen uns auf die Ordner in `c
 * `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert. Eine Beispielübersicht mit den angewandten Faktoren für die Anpassung der Buntheit:
 
 ![Beispiel Übersicht](img_overview.png)
+
 
 ## 3. Experimentelles Design
 
@@ -202,9 +206,9 @@ Bei unserem Kontrollexperiment wurde überprüft wie Bunt die Versuchspersonen d
 
 ![Beispiel eines Bildes](single_beispiel.PNG)
 
-Die Daten, welche wir durch den Single-Versuch bekommen haben, konnten wir mit denen des Neuners kombinieren um interessante Schlüsse für unsere Hypothese zu ziehen.
+Die Daten, welche wir durch den Single-Versuch bekommen haben, konnten wir mit denen des Neuners kombinieren, um interessante Schlüsse für unsere Hypothese zu ziehen.
 
-Zum starten des Kontrollexperiments müssen die Bilder, welche bewerten werden sollen, in den data Ordner. Die Anwendung `code/single_assessment/rating_experiment_single.py` zeigt der Testpersonen die Bilder in einer zufälligen Reihenfolge und speichert die Ergebnisse im result Order als CSV Datei.
+Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden sollen, in den data Ordner. Die Anwendung `code/single_assessment/rating_experiment_single.py` zeigt der Testpersonen die Bilder in einer zufälligen Reihenfolge und speichert die Ergebnisse im result Order als CSV Datei.
 
 
 ## 4. Ergebnisse
@@ -225,12 +229,12 @@ Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Alg
 
 ### Mögliche Probleme 
 Es war nicht leicht die Aufgabenstellung unserer beiden Experimente kurz und genau zu erklären.
-Dies führte dazu, dass im Nachhinein manchmal eine erneute mündliche Erklärung erfolgen musste, um genau klarzustellen wonach im Experiment gefragt wird.
+Dies führte dazu, dass im Nachhinein manchmal eine erneute mündliche Erklärung erfolgen musste, um genau klarzustellen, wonach im Experiment gefragt wird.
 In einem Fall mussten wir die Ergebnisse des "Single" Kontrollexperiments verwerfen, da die Aufgabenstellung falsch interpretiert worden war.
 Damit solche Missverständnisse vermieden werden können, wäre es sinnvoll eine kurze Erläuterung anhand eines Beispiels zum Experiment hinzuzufügen.
 
 In unseren Bildergruppen hatten wir außerdem bekannte Persönlichkeiten, wie zum Beispiel Elvis. Es könnte sein,
-dass die Versuchsperson Elvis vorher nur in schwarz und weiß kannte, welches dazu führen könnte, dass sie ein etwas unbunteres Bild
+dass die Versuchsperson Elvis vorher nur in Schwarz-Weiß kannte, welches dazu führen könnte, dass sie ein etwas unbunteres Bild
 als realistischer empfindet. 
 
 ### Offene Fragen
