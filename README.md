@@ -234,7 +234,7 @@ Von uns wurden so 23 Versuchspersonen befragt und die Ergebnisse sind im folgend
 ![Neuner - Historische Bilder - Versuchsergebnisse](niner_assessment_historic_images.png)
 
 Es wurde schnell deutlich, dass für jedes Bild der Median der gewünschten Chromawerte über dem vom Algorithmus generierten Chromawert liegt.
-Das bedeutet, dass sich die Versuchspersonen im Median eine buntere Version des Bildes als realistischster empfinden, als das Bild, das von Algorithmus generiert wurde.
+Das bedeutet, dass die Versuchspersonen im Median eine buntere Version des Bildes als realistischster empfinden, als das Bild, das von Algorithmus generiert wurde.
 
 Die zwei Bilder, die am weitesten außen des Antwortspektrums liegen, sind folgende:
 
