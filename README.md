@@ -179,10 +179,10 @@ Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit 
 
 Für die Erstellung der Stimuli sind die nachfolgenden Schritte auszuführen. Alle Verweise beziehen sich auf die Ordner in `code/image_generation`. Jede Datei ist nur einmal auszuführen. Alle Bilddateien in den jeweiligen Ordnern werden jeweils abgearbeitet.
 
-* `00_base_images`: Ordner mit den ursprünglichen Bildern. Hier liegen die modernen Bilder noch als farbige Version vor.
+* `00_base_images`: Ordner mit den originalen, unveränderten Bildern. Hier liegen die modernen Bilder noch als farbige Version vor.
 * `01_conversion_modern_images_to_to_bw`: Mit Ausführung von `create_bw_colors.py` werden ausschließlich die modernen Bildern aus `00_base_images/modern` in schwarz-weiße-Bilder umgewandelt. Die Bilder werden hierzu in den CIELAB-Farbraum konvertiert. Die Buntheitswerte der Bildpunkte werden im Anschluss auf 0 gesetzt. Zum Abschluss werden die Bilder im Unterordner `export` gespeichert.
 * `02_recolor`: Zur Rekolorierung der historischen und modernen Bilder `recolor.py` ausführen. Der oben vorgestellte Machine Learning Algorithmus wird verwendet. Die resultierenden Bilder werden im Unterordner `export` gespeichert.
-* `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert. Eine Beispielübersicht mit den angewandten Faktoren für die Anpassung der Buntheit:
+* `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert. Eine Beispielübersicht mit den jeweils angewandten Faktoren für die Anpassung der Buntheit:
 
 ![Beispiel Übersicht](img_overview.png)
 
