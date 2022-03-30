@@ -214,6 +214,8 @@ Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden s
 
 ## 4. Ergebnisse
 
+Die Analyse der Ergebnisse erfolgte mittels zweier Jupyter Notebooks in `code/analysis` jeweils für beide Experiment separat.
+
 ### Neuner - Historische Bilder
 
 Nachdem eine befragte Person an dem Neuner Experiment teilgenommen hat, könnte das Ergebnis für die historischen Bilder exemplarisch folgendermaßen aussehen:
@@ -274,7 +276,7 @@ Dafür wurden die normierten arithmetischen Mittel jedes Bildes benutzt und dara
 
 ![Neuner - Vergleich der Bildgruppen](niner_assessment_image_types.png)
 
-Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Testpersonen als die realistischsten wahrgenommen zu werden.
+Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Versuchspersonen als die realistischsten wahrgenommen zu werden.
 
 Ein t-Test zeigt hierbei einen signifikanten Unterschied zwischen den beiden Bildgruppen.
 
@@ -294,7 +296,7 @@ Die Regressionsanlysen wurden zwar mit sehr kleinen Stichproben durchgeführt, g
 
 ![Historische Bilder - Vergleich](historic_images_compare.png)
 
-Bei dem ersten Diagramm geht es nur um die historischen Bilder.<br/>
+Das erste Diagramm zeigt nur um die historischen Bilder.<br/>
 Auf der x-Achse sind die normierten arithmetischen Mittel der gewählten Chromawerte für jedes Bild aus dem Diagramm des Neuner-Experiments abgebildet.
 Auf der y-Achse befinden sich die arithmetischen Mittel der wahrgenommenen Buntheiten für jedes Bild aus dem Diagramm des Single-Experiments.
 Das Diagramm zeigt eine nicht signifikate, aber schwach ausgeprägte negative Korrelation mit einem Korrelationskoeffizienten von r = -0,3.<br/>
@@ -304,7 +306,7 @@ Auf dem zweiten Diagramm sieht man das noch deutlicher.
 
 ![Moderne Bilder - Vergleich](modern_images_compare.png)
 
-Bei diesem Diagramm handelt es sich um die gleiche Herangehensweise, wie bei dem Diagramm zuvor, nur das hier die historischen Bilder zur Grundlage genommen wurden.
+Bei diesem Diagramm handelt es sich um die gleiche Herangehensweise, wie bei dem Diagramm zuvor, nur das hier die modernen Bilder zur Grundlage genommen wurden.
 Hier sieht man sogar einen signifikanten negativen Zusammenhang mit einem Korrelationskoeffizienten von r = -6.
 
 ## 5. Diskussion
