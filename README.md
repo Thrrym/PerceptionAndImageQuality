@@ -18,7 +18,7 @@ Der Ordner `code` in diesem Repository enthält den gesamten verwendeten Code. I
 
 Historische Schwarz-Weiß-Fotografien können mittels Machine Learning Algorithmen nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus der rekolorierter Bilder hat. Als Hypothese wird angenommen, dass ein bunteres, nachträglich eingefärbtes Bild als realistischer wahrgenommen wird.
 
-Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese werden rekoloriert und neun Varianten unterschiedlicher Buntheit erstellt. Beobachtern wurde im Anschluss die Varianten der Bilder gezeigt und nach der "realistischsten" Variante gefragt.
+Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese werden rekoloriert und neun Varianten unterschiedlicher Buntheit erstellt. Beobachtern wurden die Varianten der Bilder gezeigt und nach der realistischsten Variante eines Bildes gefragt.
 
 ### Buntheit
 
@@ -26,7 +26,7 @@ Wir gehen zunächst auf den Begriff der Buntheit und den CIELAB Farbraum ein, de
 
 #### Allgemein
 
-Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier wird Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe verstanden. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung (nur Weißanteil) im Farbtongleichen Dreieck [5]:
+Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier wird Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe verstanden. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung (nur Weißanteil) im Farbtongleichen Dreieck [1]:
 
 ![Farbtongleiches Dreieck](img_farb_dreieck.png)
 
@@ -42,13 +42,13 @@ Die Buntheit kann mittels der Formel
 
 ![Cab Formel](img_cab_formel.png)
 
-für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [4]:
+für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [2]:
 
 ![CIELAB](img_lab.png)
 
-Die Abbildung zeigt, dass eine Änderung der Buntheit (Chroma in der Abb.) den  Farbton nicht beeinflusst (Hue in der Abb.). Wird die Buntheit eines Bildpunktes geändert, hat das keinen Einfluss auf den Farbton des Bildpunktes.
+Die Abbildung zeigt, dass eine Änderung der Buntheit (Chroma in der Abb.) den  Farbton nicht beeinflusst (Hue in der Abb.).
 
-Farbraumkonvertierungen vom sRGB- zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python 3 umgesetzt [2]. Hier die Umwandlung sRGB zu CIELAB:
+Farbraumkonvertierungen vom sRGB zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python 3 umgesetzt [3]. Beispielhaft zeigen wir die Konvertierung von sRGB zu CIELAB:
 
 ```python
 from skimage import io, color
@@ -66,7 +66,7 @@ Eine entsprechende Matrix für das gesamte Bild kann wie folgt erstellt werden.
 ```python
 import numpy as np
 
-def get_modification_matrix(chroma_factor, requested_shape):
+def get_modification_matrix(chroma_factor, requested_shape) -> np.ndarray:
     """ Get matrix for element wise multiplication in the request shape.
     Usually the shape is equal to the shape of the original image
     as provided by the ML algorithm. """
@@ -93,12 +93,14 @@ def modify_lab_image_chroma(chroma_factor, image_to_modify):
 ```
 
 #### Hinweis zum CIELAB Farbraum
+
 Die Buntheit im CIELAB Farbraum kann beliebig angepasst werden. Jedoch ist ein Konvertierung dieser Werte in einen anderen Farbraum nur noch bedingt möglich. Gerade für die Darstellung auf Computerbildschirmen ist eine Konvertierung in den sRGB-Farbraum notwendig. Entsprechend sieht auch das `skimage` Paket Limitierungen für die Konvertierung aus dem CIELAB Farbraum vor. So müssen a* und b* im Intervall [-100, 100] in den reellen Zahlen liegen. Es ergibt sich somit auch, dass die Buntheit im Intervall [0, 100] liegt.
 
 #### Wahl der Buntheitsfaktoren
+
 Basierend auf den oben gezeigten Grenzen für die Manipulation der Buntheit sind die Faktoren für die Manipulation der Buntheit zu wählen. Die Varianten eines Bildes mit unterschiedlichen Buntheiten enthält in der vorliegenden Untersuchung immer:
-* Faktor 1,0: Buntheit des Bildes, wie durch den Algorithmus generiert (Original rekoloriertes Bild).
-* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Beobachtern auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert.
+* Faktor 1,0: Buntheit des Bildes, wie durch den Algorithmus generiert (original rekoloriertes Bild).
+* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Beobachtern auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert. 0,6 wurde gewählt, da ein hinreichend wahrnehmbarer Abstand zu Faktor 1,0 in Vorversuchenbeobachtet wurde, ohne dass der Eindruck eines reinen Schwarz-Weiß-Bildes entsteht.
 * Faktor max: Basierend auf der höchsten Buntheit des gesamten original rekolorierten Bildes, der höchst mögliche Buntheitswert. Wie durch die folgende Funktion bestimmt:
 ```python
 import numpy as np
@@ -149,7 +151,7 @@ Im Ergbnis erhalten wir Buntkeitsfaktoren für jedes Bild mit festen Faktoren, h
 
 ### Machine Learning Modell
 
-Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde duch Zhang et al. entwickelt [1]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
+Zum Einsatz kommt hier ein bereits trainiertes Machine Learning (nachfolgend ML) Modell. Das Modell wurde duch Zhang et al. entwickelt [4]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
 
 ```python
 from colorization.colorizers import *
@@ -159,19 +161,19 @@ from colorization.colorizers import *
 out_img = postprocess_tens(tens_l_orig, colorizer(tens_l_rs).cpu())
 ```
 
-Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im Training wurde ein Bild im CIELAB Farbraum, dessen Buntheitswerte a* und b* entfernt wurden, als Eingabe für das Modell verwendet. Der Output des Modells wurde mit dem originalen Bild, samt Buntheitswerten, verglichen. Basierend auf dem Vergleich erfolgte das Training des Modells, wie in dieser Abbildung gezeigt [1]:
+Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im Training wurde ein Bild im CIELAB Farbraum, dessen Buntheitswerte a* und b* entfernt wurden, als Eingabe für das Modell verwendet. Der Output des Modells wurde mit dem originalen Bild, samt Buntheitswerten, verglichen. Basierend auf dem Vergleich erfolgte das Training des Modells, wie in dieser Abbildung gezeigt [4]:
 
 ![ML Training](img_ml_training.png)
 
 
-Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntheitswerten nicht möglich ist.
+Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da keine Buntheitswerten für einen Vergleich existieren.
 
 ## 2. Vorbereitung der Stimuli
 
 ### Auswahl der Bilder
 Es wurden historische und moderne Bilder gewählt. Dabei wurden 30 historische Bilder aus verschiedenen Quellen zusammengetragen. Das Augenmerk lag darauf, möglichst vielfältige Themen abzudecken. So sind z.B. Architektur-, Landschafts- und Portraitaufnahmen vertreten.
 
-Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit unter anderem diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Themen der Bilder entsprechen den verwendeten Themen der historischen Bilder.
+Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit unter anderem diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [4]. Die modernen Bilder wurden der Tampere Image Database 2013 entnommen [5]. Die Themen der Bilder entsprechen den verwendeten Themen der historischen Bilder.
 
 ### Ablauf der Erstellung
 
@@ -307,7 +309,7 @@ Hier sieht man sogar einen signifikanten negativen Zusammenhang mit einem Korrel
 ## 5. Diskussion
 Im Rahmen unseres Seminarprojekts haben die Auswertungen unserer Experimente gezeigt, dass Buntheit einen positiven Einfluss auf den wahrgenommenen Realismus hat. Anfänglich sind wir davon ausgegangen, dass wenn ein nachträglich eingefärbtes Bild bunter ist, es als realistischer wahrgenommen wird. Diese Erwartung hat sich nach den gewonnenen Erkenntnissen als wahr herausgestellt, jedoch nicht uneingeschränkt. Wir können zwar die Buntheit eines Bildes beliebig viel hochdrehen, aber ab einem bestimmten Punkt wird das Bild extrem unrealistisch, da die Farben ziemlich grell werden.
 
-Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Algorithmus [1] bunter gestalten können und sie dadurch realistischer wirken. Folglich können wir sagen, dass wir mit unserer Vorgehensweise den Algorithmus von Zhang et al., bezogen auf den wahrgenommenen Realismus, verbessern können.
+Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Algorithmus [4] bunter gestalten können und sie dadurch realistischer wirken. Folglich können wir sagen, dass wir mit unserer Vorgehensweise den Algorithmus von Zhang et al., bezogen auf den wahrgenommenen Realismus, verbessern können.
 
 
 
@@ -325,12 +327,13 @@ als realistischer empfindet.
 In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereiches eines Bild bunter gemacht werden, als andere Bereiche.
 
 ## Referenzen
-[1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016, [doi](https://doi.org/10.1007/978-3-319-46487-9_40).
 
-[2] scikit-image development team. Besucht am 21.03.2022, https://scikit-image.org/.
+[1] Eva Lübbe. Farbempfindung, Farbbeschreibung und Farbmessung. 1. Auflage, Wiesbaden 2013.
 
-[3] Tampere Image Database. Besucht am 13.12.2021, https://www.ponomarenko.info/tid2013.htm.
+[2] Konica Minolta. Precise Color Communication. Besucht am 08.12.2021, https://www.konicaminolta.com/instruments/download/booklet/index.html.
 
-[4] Konica Minolta. Precise Color Communication. Besucht am 08.12.2021, https://www.konicaminolta.com/instruments/download/booklet/index.html.
+[3] scikit-image development team. Besucht am 21.03.2022, https://scikit-image.org/.
 
-[5] Eva Lübbe. Farbempfindung, Farbbeschreibung und Farbmessung. 1. Auflage, Wiesbaden 2013.
+[4] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016, [doi](https://doi.org/10.1007/978-3-319-46487-9_40).
+
+[5] Tampere Image Database. Besucht am 13.12.2021, https://www.ponomarenko.info/tid2013.htm.
