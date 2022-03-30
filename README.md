@@ -18,7 +18,7 @@ Der Ordner `code` in diesem Repository enthält den gesamten verwendeten Code. I
 
 Historische Schwarz-Weiß-Fotografien können mittels Machine Learning Algorithmen nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus der rekolorierter Bilder hat. Als Hypothese wird angenommen, dass ein bunteres, nachträglich eingefärbtes Bild als realistischer wahrgenommen wird.
 
-Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese werden rekoloriert und neun Varianten unterschiedlicher Buntheit erstellt. Beobachtern wurden die Varianten der Bilder gezeigt und nach der realistischsten Variante eines Bildes gefragt.
+Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese werden rekoloriert und neun Varianten unterschiedlicher Buntheit erstellt. Versuchspersonen wurden die Varianten der Bilder gezeigt und nach der realistischsten Variante eines Bildes gefragt.
 
 ### Buntheit
 
@@ -100,7 +100,7 @@ Die Buntheit im CIELAB Farbraum kann beliebig angepasst werden. Jedoch ist ein K
 
 Basierend auf den oben gezeigten Grenzen für die Manipulation der Buntheit sind die Faktoren für die Manipulation der Buntheit zu wählen. Die Varianten eines Bildes mit unterschiedlichen Buntheiten enthält in der vorliegenden Untersuchung immer:
 * Faktor 1,0: Buntheit des Bildes, wie durch den Algorithmus generiert (original rekoloriertes Bild).
-* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Beobachtern auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert. 0,6 wurde gewählt, da ein hinreichend wahrnehmbarer Abstand zu Faktor 1,0 in Vorversuchenbeobachtet wurde, ohne dass der Eindruck eines reinen Schwarz-Weiß-Bildes entsteht.
+* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Versuchspersonen auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert. 0,6 wurde gewählt, da ein hinreichend wahrnehmbarer Abstand zu Faktor 1,0 in Vorversuchenbeobachtet wurde, ohne dass der Eindruck eines reinen Schwarz-Weiß-Bildes entsteht.
 * Faktor max: Basierend auf der höchsten Buntheit des gesamten original rekolorierten Bildes, der höchst mögliche Buntheitswert. Wie durch die folgende Funktion bestimmt:
 ```python
 import numpy as np
@@ -189,7 +189,10 @@ Für die Erstellung der Stimuli sind die nachfolgenden Schritte auszuführen. Al
 
 ## 3. Experimentelles Design
 
-Unseren Versuch haben wir in zwei verschiedene Experimente aufgeteilt. Einmal das Hauptexperiment „Neuner“ und das Kontrollexperiment „Single“.
+Unseren Versuch haben wir in zwei verschiedene Experimente aufgeteilt.
+1. Das Hauptexperiment „Neuner“ und 
+2. das Kontrollexperiment „Single“.
+
 Die Testbilder werden mit der Python Anwendung `code/nines/generate_pictures_file.py` in die richtige Form und Größe gebracht, damit sie später bei den Versuchen benutzt werden können. Außerdem wird eine CVS Datei kreiert, welche der Neuner zur Nutzung der Bilder benötigt.
 
 ### Neuner
@@ -199,17 +202,14 @@ In unserem Hauptexperiment sehen Versuchspersonen jeweils dasselbe Bild in neun 
 
 Es wurden insgesamt 45 Bilder gezeigt. Aufgeteilt wurden diese Bilder in 30 historische und 15 moderne. Die Bilder wurden in jedem Durchlauf zufällig angeordnet, so dass die Chance minimiert wird, das Versuchspersonen beeinflusst werden durch vorherige Durchläufe.
 
-Um selbst einen Versuch durchzuführen, müssen die Bilder im Pictures Ordner inklusive der `pictures.csv` gespeichert werden. Die Anwendung `code/nines/experiment_nines.py` kann dann gestartet werden. Diese liest `pictures.csv` aus und zeigt dem User die Bilder. Außerdem werden alle Eingaben des Users gespeichert und am Ende in einer CSV Datei im results Order gespeichert. Bei einem Neustart des Experiments werden die Bildergruppen wieder zufällig aneinandergereiht.
+Um selbst einen Versuch durchzuführen, müssen die Bilder im Ordner `nines/Pictures` inklusive der `pictures.csv` gespeichert werden, die durch `generate_pictures_file.py` erstellt wurde. Die Anwendung `nines/experiment_nines.py` kann dann gestartet werden. Diese liest `pictures.csv` aus und zeigt dem User die Bilder. Außerdem werden alle Eingaben des Users gespeichert und am Ende in einer CSV Datei im results Order gespeichert. Bei einem Neustart des Experiments werden die Bildergruppen wieder zufällig aneinandergereiht.
 
 ### Single
-Bei unserem Kontrollexperiment wurde überprüft wie Bunt die Versuchspersonen das vom Algorithmus eingefärbte Bild empfinden. Hier haben wir für jede Bildergruppe lediglich ein Bild gezeigt und die Testperson sollte auf einer Skala von 0 (keine Farben) bis 9 (höchste Intensität an Buntheit) ihre Bewertung speichern.
+Bei unserem Kontrollexperiment wurde überprüft wie Bunt die Versuchspersonen das vom Algorithmus eingefärbte Bild ohne eine Veränderung der Buntheit empfinden. Hier haben wir für jede Bildergruppe lediglich ein Bild gezeigt und die Testperson sollte auf einer Skala von 0 (keine Farben) bis 9 (höchste Intensität an Buntheit) ihre Bewertung abgeben:
 
 ![Beispiel eines Bildes](single_beispiel.PNG)
 
-Die Daten, welche wir durch den Single-Versuch bekommen haben, konnten wir mit denen des Neuners kombinieren, um interessante Schlüsse für unsere Hypothese zu ziehen.
-
-Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden sollen, in den data Ordner. Die Anwendung `code/single_assessment/rating_experiment_single.py` zeigt der Testpersonen die Bilder in einer zufälligen Reihenfolge und speichert die Ergebnisse im result Order als CSV Datei.
-
+Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden sollen, in den Ordner `single_assessment/data`. Die Anwendung `single_assessment/rating_experiment_single.py` zeigt der Testpersonen die Bilder in einer zufälligen Reihenfolge und speichert die Ergebnisse im Order `results` als CSV Datei.
 
 ## 4. Ergebnisse
 
