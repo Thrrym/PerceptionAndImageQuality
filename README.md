@@ -28,13 +28,13 @@ Wir gehen zunächst auf den Begriff der Buntheit und den CIELAB Farbraum ein, de
 
 #### Allgemein
 
-Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier wird Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe verstanden. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung (nur Weißanteil) im Farbtongleichen Dreieck [5]:
+Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier wird Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe verstanden. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterschied zur Sättigung (nur Weißanteil) im Farbtongleichen Dreieck [5]:
 
 ![Farbtongleiches Dreieck](img_farb_dreieck.png)
 
 #### CIELAB Farbraum
 
-Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIE 1976 L* a* b* Farbraum konvertiert (nachfolgend CIELAB Farbraum). Im CIELAB Farbraum ist die Buntheit von jeder Farbe bzw. jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Frabraum die folgenden Informationen gespeichert:
+Basierend auf DIN EN ISO/CIE 11664-4 werden die Bilder in den CIE 1976 L* a* b* Farbraum konvertiert (nachfolgend CIELAB Farbraum). Im CIELAB Farbraum ist die Buntheit von jeder Farbe bzw. jedem Bildpunkt berechen- und manipulierbar. Für jeden Bildpunkt werden im CIELAB Farbraum die folgenden Informationen gespeichert:
 
 * L*: Helligkeit
 * a*: Rot-Grün-Buntheit
@@ -44,7 +44,7 @@ Die Buntheit kann mittels der Formel
 
 ![Cab Formel](img_cab_formel.png)
 
-für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [4]:
+für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammenhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [4]:
 
 ![CIELAB](img_lab.png)
 
@@ -145,13 +145,13 @@ def get_factors_between_min_max(min_value, max_value) -> list:
     return list(calculated_function(x_range))
 ```
 
-Im Ergbnis erhalten wir Buntkeitsfaktoren für jedes Bild mit festen Faktoren, hier am Beispiel für Bild `I04`:
+Im Ergebnis erhalten wir Buntheitsfaktoren für jedes Bild mit festen Faktoren, hier am Beispiel für Bild `I04`:
 
 ![Faktoren](I04_chroma_factors.png)
 
 ### Machine Learning Modell
 
-Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde duch Zhang et al. entwickelt [1]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
+Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde durch Zhang et al. entwickelt [1]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
 
 ```python
 from colorization.colorizers import *
@@ -173,16 +173,16 @@ Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern
 ### Auswahl der Bilder
 Es wurden historische und moderne Bilder gewählt. Dabei wurden 30 historische Bilder aus verschiedenen Quellen zusammengetragen. Das Augenmerk lag darauf, möglichst vielfältige Themen abzudecken. So sind z.B. Architektur-, Landschafts- und Portraitaufnahmen vertreten.
 
-Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit unter anderem diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Themen der Bilder entsprechen den verwendeten Themen der historischen Bilder.
+Die modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit unter anderem diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Themen der Bilder entsprechen den verwendeten Themen der historischen Bilder.
 
 ### Ablauf der Erstellung
 
 Für die Erstellung der Stimuli sind die nachfolgenden Schritte auszuführen. Alle Verweise beziehen sich auf die Ordner in `code/image_generation`. Jede Datei ist nur einmal auszuführen. Alle Bilddateien in den jeweiligen Ordnern werden jeweils abgearbeitet.
 
 * `00_base_images`: Ordner mit den ursprünglichen Bildern. Hier liegen die modernen Bilder noch als farbige Version vor.
-* `01_conversion_modern_images_to_to_bw`: Mit Ausführung von `create_bw_colors.py` werden ausschließlich die modernen Bildern aus `00_base_images/modern` in schwarz-weiße-Bilder umgewandelt. Die Bilder werden hierzu in den CIELAB-Farbraum konvertiert. Die Buntheitswerte der Bildpunkte werden im Anschluss auf 0 gesetzt. Zum Abschluss werden die Bilder im Unterordner `export` gespeichert.
+* `01_conversion_modern_images_to_to_bw`: Mit Ausführung von `create_bw_colors.py` werden ausschließlich die modernen Bilder aus `00_base_images/modern` in schwarz-weiße-Bilder umgewandelt. Die Bilder werden hierzu in den CIELAB-Farbraum konvertiert. Die Buntheitswerte der Bildpunkte werden im Anschluss auf 0 gesetzt. Zum Abschluss werden die Bilder im Unterordner `export` gespeichert.
 * `02_recolor`: Zur Rekolorierung der historischen und modernen Bilder `recolor.py` ausführen. Der oben vorgestellte Machine Learning Algorithmus wird verwendet. Die resultierenden Bilder werden im Unterordner `export` gespeichert.
-* `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert. Eine Beispielübersicht mit den angewandten Faktoren für die Anpassung der Buntheit:
+* `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergehenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert. Eine Beispielübersicht mit den angewandten Faktoren für die Anpassung der Buntheit:
 
 ![Beispiel Übersicht](img_overview.png)
 
@@ -288,8 +288,8 @@ Auch hier zeigt ein t-Test einen signifikanten Unterschied.
 
 ### Zusammenführung der Versuchsergebnisse
 
-Um die Ergebnisse der beiden Versuche nun zusammen zu führen wurden folgende Diagramme erstellt.
-Die Regressionsanlysen wurden zwar mit sehr kleinen Stichproben durchgeführt, geben aber trotzdem eine grobe Tendenz der Zusammenhänge.
+Um die Ergebnisse der beiden Versuche nun zusammenzuführen wurden folgende Diagramme erstellt.
+Die Regressionsanalysen wurden zwar mit sehr kleinen Stichproben durchgeführt, geben aber trotzdem eine grobe Tendenz der Zusammenhänge.
 
 ![Historische Bilder - Vergleich](historic_images_compare.png)
 
@@ -324,7 +324,7 @@ dass die Versuchsperson Elvis vorher nur in Schwarz-Weiß kannte, welches dazu f
 als realistischer empfindet. 
 
 ### Offene Fragen
-In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereiches eines Bild bunter gemacht werden, als andere Bereiche.
+In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereichen eines Bildes bunter gemacht werden, als andere Bereiche.
 
 ## Referenzen
 [1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016, [doi](https://doi.org/10.1007/978-3-319-46487-9_40).
