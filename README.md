@@ -268,7 +268,7 @@ Das realistischste Bild ist I06 bei dem der Median genau auf dem Bild liegt, wel
 
 ![H06 - 1.0](I06_1.0_chroma.JPG)
 
-Als Ausreißer kann man an dieser Stelle noch I23 ansprechen. Bei diesem Bild habe die Versuchspersonen eine unbuntere Version als realistischer empfunden, als das vom Algorithmus generierte.
+Als Ausreißer kann man an dieser Stelle noch I23 ansprechen. Bei diesem Bild haben die Versuchspersonen eine unbuntere Version als realistischer empfunden, als die vom Algorithmus generierte.
 
 ![I23 - 1.0](I23_1.0_chroma.JPG)
 
