@@ -221,7 +221,7 @@ Nachdem eine befragte Person an dem Neuner Experiment teilgenommen hat, könnte 
 
 Auf der x-Achse sind hier die Bild-IDs abgebildet und auf der y-Achse der normierte gewählte Chromafaktor.
 Bei Chromafaktor 0.0 befindet sich eine waagerechte blaue Linie. Diese symbolisiert den Chromawert, mit dem das Bild vom Algorithmus eingefärbt wurde.
-Die Punkte in dem Diagramm zeigen dann für die Antworten der Testperson.
+Die Punkte in dem Diagramm zeigen dann die Antworten der Testperson.
 
 Von uns wurden so 23 Versuchspersonen befragt und die Ergebnisse sind im folgenden Diagramm zusammengetragen.
 
@@ -307,23 +307,22 @@ Bei diesem Diagramm handelt es sich um die gleiche Herangehensweise, wie bei dem
 Hier sieht man sogar einen signifikanten negativen Zusammenhang mit einem Korrelationskoeffizienten von r = -6.
 
 ## 5. Diskussion
-Im Rahmen unseres Seminarprojekts haben die Auswertungen unserer Experimente gezeigt, dass Buntheit einen positiven Einfluss auf den wahrgenommenen Realismus hat. Anfänglich sind wir davon ausgegangen, dass wenn ein nachträglich eingefärbtes Bild bunter ist, es als realistischer wahrgenommen wird. Diese Erwartung hat sich nach den gewonnenen Erkenntnissen als wahr herausgestellt, jedoch nicht uneingeschränkt. Wir können zwar die Buntheit eines Bildes beliebig viel hochdrehen, aber ab einem bestimmten Punkt wird das Bild extrem unrealistisch, da die Farben ziemlich grell werden.
 
-Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Algorithmus [4] bunter gestalten können und sie dadurch realistischer wirken. Folglich können wir sagen, dass wir mit unserer Vorgehensweise den Algorithmus von Zhang et al., bezogen auf den wahrgenommenen Realismus, verbessern können.
+Im Rahmen unseres Seminarprojekts haben die Auswertungen unserer Experimente gezeigt, dass Buntheit einen positiven Einfluss auf den wahrgenommenen Realismus der eingefärbten Bilder hat. Anfänglich sind wir davon ausgegangen, dass ein bunteres, nachträglich eingefärbtes Bild als realistischer wahrgenommen wird. Diese Erwartung hat sich nach den gewonnenen Erkenntnissen als wahr herausgestellt, jedoch nicht uneingeschränkt. Wird die Buntheit sehr stark erhöht, zeigen sich die Farben des Bildes als grell bzw. unnatürlich. Die Versuchspersonen nahmen diese Versionen nicht mehr als realistisch wahr.
 
-
+Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Algorithmus [4] bunter gestalten können und sie dadurch als realistischer wahrgenommen werden. Folglich haben auf gezeigt, dass mit unserer Vorgehensweise der Algorithmus von Zhang et al., bezogen auf den wahrgenommenen Realismus, verbessert werden könnte.
 
 ### Mögliche Probleme 
-Es war nicht leicht die Aufgabenstellung unserer beiden Experimente kurz und genau zu erklären.
-Dies führte dazu, dass im Nachhinein manchmal eine erneute mündliche Erklärung erfolgen musste, um genau klarzustellen, wonach im Experiment gefragt wird.
-In einem Fall mussten wir die Ergebnisse des "Single" Kontrollexperiments verwerfen, da die Aufgabenstellung falsch interpretiert worden war.
-Damit solche Missverständnisse vermieden werden können, wäre es sinnvoll eine kurze Erläuterung anhand eines Beispiels zum Experiment hinzuzufügen.
 
-In unseren Bildergruppen hatten wir außerdem bekannte Persönlichkeiten, wie zum Beispiel Elvis. Es könnte sein,
-dass die Versuchsperson Elvis vorher nur in Schwarz-Weiß kannte, welches dazu führen könnte, dass sie ein etwas unbunteres Bild
-als realistischer empfindet. 
+Es hat sich gezeigt, dass es problematisch ist, den Versuchspersonen die Aufgabenstellung unserer beiden Experimente zu vermitteln. Ergebnisse einer Versuchsperson wurden teilweise verworfen, da die Aufgabenstellung nicht korrekt verstanden wurde. Damit solche Missverständnisse vermieden werden können, wäre es sinnvoll eine kurze Erläuterung anhand eines Beispiels zum Experiment hinzuzufügen, dass den Versuchspersonen vor Beginn des Experiments gezeigt wird.
+
+In den gewählten historischen Bildern sind zudem bekannte Motive vertreten. So ist zum Beispiel ein Portrait von Elvis Presley Teil der historischen Bilder. Es könnte sein,
+dass die Versuchspersonen Motive bereits in Schwarz-Weiß kannten. Es erscheint möglich, dass in solchen Fällen eine unbuntere Version des Bildes als realistischer bevorzugt wird.
+
+Die Autoren selbst waren Teil der Versuchspersonen. Eine Beeinflussung der Ergebnisse der Autoren durch vorhanderens Vorwissen kann nicht ausgeschlossen werden. Obwohl keine Ausreißer in den Ergebnissen der Autoren festgestellt wurden.
 
 ### Offene Fragen
+
 In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereiches eines Bild bunter gemacht werden, als andere Bereiche.
 
 ## Referenzen
