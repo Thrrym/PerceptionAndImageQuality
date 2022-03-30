@@ -6,15 +6,13 @@
 
 ## Inhaltsverzeichnis
 
-[1. Einleitung](#1-einleitung)
+* [Einleitung](#1-einleitung)
+* [Vorbereitung der Stimuli](#2-vorbereitung-der-stimuli)
+* [Experimentelles Design](#3-experimentelles-design)
+* [Ergebnisse](#4-ergebnisse)
+* [Diskussion](#5-diskussion)
 
-[2. Vorbereitung der Stimuli](#2-vorbereitung-der-stimuli)
-
-[3. Experimentelles Design](#3-experimentelles-design)
-
-[4. Ergebnisse](#4-ergebnisse)
-
-[5. Diskussion](#5-diskussion)
+Der Ordner `code` in diesem Repository enthält den gesamten verwendeten Code. Im Ordner `presentations` sind die Folien hinterlegt, wie sie in den Präsentationen im Rahmen des Seminars gehalten wurden.
 
 ## 1. Einleitung
 
