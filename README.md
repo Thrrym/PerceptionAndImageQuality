@@ -11,6 +11,7 @@
 * [Experimentelles Design](#3-experimentelles-design)
 * [Ergebnisse](#4-ergebnisse)
 * [Diskussion](#5-diskussion)
+* [Referenzen](#referenzen)
 
 Der Ordner `code` in diesem Repository enthält den gesamten verwendeten Code. Im Ordner `presentations` sind die Folien hinterlegt, wie sie in den Präsentationen im Rahmen des Seminars gehalten wurden.
 
