@@ -213,12 +213,98 @@ Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden s
 
 ## 4. Ergebnisse
 
+### Neuner - Historische Bilder
 
+Nachdem eine befragte Person an dem Neuner Experiment teilgenommen hat, könnte das Ergebnis für die historischen Bilder exemplarisch folgendermaßen aussehen:
 
+![Neuner - Ergebnisse einer Versuchsperson](niner_assessment_single_observer.png)
 
-### Qualitative Beobachtungen
+Auf der x-Achse sind hier die Bild-IDs abgebildet und auf der y-Achse der normierte gewählte Chromafaktor.
+Bei Chromafaktor 0.0 befindet sich eine waagerechte blaue Linie. Diese symbolisiert den Chromawert, mit dem das Bild vom Algorithmus eingefärbt wurde.
+Die Punkte in dem Diagramm zeigen dann für die Antworten der Testperson.
 
+Von uns wurden so 23 Versuchspersonen befragt und die Ergebnisse sind im folgenden Diagramm zusammengetragen.
 
+![Neuner - Historische Bilder - Versuchsergebnisse](niner_assessment_historic_images.png)
+
+Es wurde schnell deutlich, dass für jedes Bild der Median der gewünschten Chromawerte über dem vom Algorithmus generierten Chromawert liegt.
+Das bedeutet, dass sich die Versuchspersonen im Median eine buntere Version des Bildes als realistischster empfinden, als das Bild, das von Algorithmus generiert wurde.
+
+Die zwei Bilder, die am weitesten außen des Antwortspektrums liegen, sind folgende:
+
+![H25 - 1.0](H25_1.0_chroma.JPG)
+
+H25 wurde als das unrealistische Bild wahrgenommen. Hier halten die Versuchspersonen im Median folgende Version als am realistischsten:
+
+![H25 - 2.13](H25_2.13_chroma.JPG)
+
+H11 dagegen wurde als das Bild bewertet, bei dem der Algorithmus die realistischste Version generiert hat.
+
+![H11 - 1.0](H11_1.0_chroma.JPG)
+
+### Neuner - Moderne Bilder
+
+Für die modernen Bilder konnten wir ein ganz ähnliches Ergebnis erzielen.
+
+![Neuner - Moderne Bilder - Versuchsergebnisse](niner_assessment_modern_images.png)
+
+Auch hier wählten die Versuchspersonen im Median meistens buntere Versionen, als die vom Algorithmus generiert.
+
+Zu den interessantesten Sonderfällen zählen hier I08, welches am unrealistischsten wahrgenommen wurde.
+
+![I08 - 1.0](I08_1.0_chroma.JPG)
+
+Hier haben die Probanden eher diese Version als realistisch empfunden.
+
+![I08 - 3.21](I08_3.21_chroma.JPG)
+
+Das realistischste Bild ist I06 bei dem der Median genau auf dem Bild liegt, welches vom Algorithmus erzeugt wurde.
+
+![H06 - 1.0](I06_1.0_chroma.JPG)
+
+Als Ausreißer kann man an dieser Stelle noch I23 ansprechen. Bei diesem Bild habe die Versuchspersonen eine unbuntere Version als realistischer empfunden, als das vom Algorithmus generierte.
+
+![I23 - 1.0](I23_1.0_chroma.JPG)
+
+### Neuner - Vergleich der Bildgruppen
+
+Im folgenden Diagramm sieht man die vereinigten Ergebnisse für die modernen und die historischen Bilder nebeneinander.
+Dafür wurden die normierten arithmetischen Mittel jedes Bildes benutzt und daraus die Boxplots erstellt.
+
+![Neuner - Vergleich der Bildgruppen](niner_assessment_image_types.png)
+
+Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Testpersonen als die realistischsten wahrgenommen zu werden.
+
+Ein t-Test zeigt hierbei einen signifikanten Unterschied zwischen den beiden Bildgruppen.
+
+### Single - Vergleich der Bildgruppen
+
+Bei dem Kontrollexperiment sind wir ähnlich vorgegangen. Der Vergleich der Bildgruppen zeigt hier Folgendes:
+
+![Single - Vergleich der Bildgruppen](single_assessment_image_types.png)
+
+Man sieht, dass die modernen Bilder generell als bunter wahrgenommen werden als die historischen.
+Auch hier zeigt ein t-Test einen signifikanten Unterschied.
+
+### Zusammenführung der Versuchsergebnisse
+
+Um die Ergebnisse der beiden Versuche nun zusammen zu führen wurden folgende Diagramme erstellt.
+Die Regressionsanlysen wurden zwar mit sehr kleinen Stichproben durchgeführt, geben aber trotzdem eine grobe Tendenz der Zusammenhänge.
+
+![Historische Bilder - Vergleich](historic_images_compare.png)
+
+Bei dem ersten Diagramm geht es nur um die historischen Bilder.<br/>
+Auf der x-Achse sind die normierten arithmetischen Mittel der gewählten Chromawerte für jedes Bild aus dem Diagramm des Neuner-Experiments abgebildet.
+Auf der y-Achse befinden sich die arithmetischen Mittel der wahrgenommenen Buntheiten für jedes Bild aus dem Diagramm des Single-Experiments.
+Das Diagramm zeigt eine nicht signifikate, aber schwach ausgeprägte negative Korrelation mit einem Korrelationskoeffizienten von r = -0,3.<br/>
+Damit lässt sich sagen, je bunter ein Bild wahrgenommen wird, desto näher ist das ursprünglich vom Algorithmus eingefärbte Bild an dem, welches am realistischsten wahrgenommen wurde.
+
+Auf dem zweiten Diagramm sieht man das noch deutlicher.
+
+![Moderne Bilder - Vergleich](modern_images_compare.png)
+
+Bei diesem Diagramm handelt es sich um die gleiche Herangehensweise, wie bei dem Diagramm zuvor, nur das hier die historischen Bilder zur Grundlage genommen wurden.
+Hier sieht man sogar einen signifikanten negativen Zusammenhang mit einem Korrelationskoeffizienten von r = -6.
 
 ## 5. Diskussion
 Im Rahmen unseres Seminarprojekts haben die Auswertungen unserer Experimente gezeigt, dass Buntheit einen positiven Einfluss auf den wahrgenommenen Realismus hat. Anfänglich sind wir davon ausgegangen, dass wenn ein nachträglich eingefärbtes Bild bunter ist, es als realistischer wahrgenommen wird. Diese Erwartung hat sich nach den gewonnenen Erkenntnissen als wahr herausgestellt, jedoch nicht uneingeschränkt. Wir können zwar die Buntheit eines Bildes beliebig viel hochdrehen, aber ab einem bestimmten Punkt wird das Bild extrem unrealistisch, da die Farben ziemlich grell werden.
