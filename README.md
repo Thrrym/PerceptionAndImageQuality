@@ -6,21 +6,20 @@
 
 ## Inhaltsverzeichnis
 
-[1. Einleitung](#1-einleitung)
+* [Einleitung](#1-einleitung)
+* [Vorbereitung der Stimuli](#2-vorbereitung-der-stimuli)
+* [Experimentelles Design](#3-experimentelles-design)
+* [Ergebnisse](#4-ergebnisse)
+* [Diskussion](#5-diskussion)
+* [Referenzen](#referenzen)
 
-[2. Vorbereitung der Stimuli](#2-vorbereitung-der-stimuli)
-
-[3. Experimentelles Design](#3-experimentelles-design)
-
-[4. Ergebnisse](#4-ergebnisse)
-
-[5. Diskussion](#5-diskussion)
+Der Ordner `code` in diesem Repository enthält den gesamten verwendeten Code. Im Ordner `presentations` sind die Folien hinterlegt, wie sie in den Präsentationen im Rahmen des Seminars gehalten wurden.
 
 ## 1. Einleitung
 
 Historische Schwarz-Weiß-Fotografien können mittels Machine Learning Algorithmen nachträglich eingefärbt bzw. rekoloriert werden. Wir untersuchen den Einfluss der Buntheit der eingefärbten Bilder auf den wahrgenommenen Realismus. Die vorliegende Fragestellung ist, welchen Einfluss die Buntheit auf den wahrgenommenen Realismus der rekolorierter Bilder hat. Als Hypothese wird angenommen, dass ein bunteres, nachträglich eingefärbtes Bild als realistischer wahrgenommen wird.
 
-Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese werden rekoloriert und neun Varianten unterschiedlicher Buntheit erstellt. Beobachtern wurde im Anschluss die Varianten der Bilder gezeigt und nach der "realistischsten" Variante gefragt.
+Die Untersuchung erfolgt anhand von historischen und modernen Fotografien. Diese werden rekoloriert und neun Varianten unterschiedlicher Buntheit erstellt. Versuchspersonen wurden die Varianten der Bilder gezeigt und nach der realistischsten Variante eines Bildes gefragt.
 
 ### Buntheit
 
@@ -28,7 +27,8 @@ Wir gehen zunächst auf den Begriff der Buntheit und den CIELAB Farbraum ein, de
 
 #### Allgemein
 
-Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier wird Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe verstanden. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterschied zur Sättigung (nur Weißanteil) im Farbtongleichen Dreieck [5]:
+
+Zentraler Begriff der vorliegenden Untersuchung ist Buntheit bzw. Chroma. Hier wird Buntheit als Anteil von Schwarz __und__ Weiß in einer Farbe verstanden. Je mehr Schwarz- und Weißanteil in einer Farbe enthalten ist, desto geringer ist die Buntheit einer Farbe. Verdeutlicht wird dies und der Unterscheid zur Sättigung (nur Weißanteil) im Farbtongleichen Dreieck [1]:
 
 ![Farbtongleiches Dreieck](img_farb_dreieck.png)
 
@@ -44,13 +44,13 @@ Die Buntheit kann mittels der Formel
 
 ![Cab Formel](img_cab_formel.png)
 
-für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammenhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [4]:
+für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit von a* und b* abhängig. Eine einfache Darstellung des Zusammhangs von a*, b* und der Buntheit im CIELAB Farbraum kann der folgenden Darstellungen entnommen werden [2]:
 
 ![CIELAB](img_lab.png)
 
-Die Abbildung zeigt, dass eine Änderung der Buntheit (Chroma in der Abb.) den  Farbton nicht beeinflusst (Hue in der Abb.). Wird die Buntheit eines Bildpunktes geändert, hat das keinen Einfluss auf den Farbton des Bildpunktes.
+Die Abbildung zeigt, dass eine Änderung der Buntheit (Chroma in der Abb.) den  Farbton nicht beeinflusst (Hue in der Abb.).
 
-Farbraumkonvertierungen vom sRGB- zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python 3 umgesetzt [2]. Hier die Umwandlung sRGB zu CIELAB:
+Farbraumkonvertierungen vom sRGB zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python 3 umgesetzt [3]. Beispielhaft zeigen wir die Konvertierung von sRGB zu CIELAB:
 
 ```python
 from skimage import io, color
@@ -68,7 +68,7 @@ Eine entsprechende Matrix für das gesamte Bild kann wie folgt erstellt werden.
 ```python
 import numpy as np
 
-def get_modification_matrix(chroma_factor, requested_shape):
+def get_modification_matrix(chroma_factor, requested_shape) -> np.ndarray:
     """ Get matrix for element wise multiplication in the request shape.
     Usually the shape is equal to the shape of the original image
     as provided by the ML algorithm. """
@@ -95,12 +95,14 @@ def modify_lab_image_chroma(chroma_factor, image_to_modify):
 ```
 
 #### Hinweis zum CIELAB Farbraum
+
 Die Buntheit im CIELAB Farbraum kann beliebig angepasst werden. Jedoch ist ein Konvertierung dieser Werte in einen anderen Farbraum nur noch bedingt möglich. Gerade für die Darstellung auf Computerbildschirmen ist eine Konvertierung in den sRGB-Farbraum notwendig. Entsprechend sieht auch das `skimage` Paket Limitierungen für die Konvertierung aus dem CIELAB Farbraum vor. So müssen a* und b* im Intervall [-100, 100] in den reellen Zahlen liegen. Es ergibt sich somit auch, dass die Buntheit im Intervall [0, 100] liegt.
 
 #### Wahl der Buntheitsfaktoren
+
 Basierend auf den oben gezeigten Grenzen für die Manipulation der Buntheit sind die Faktoren für die Manipulation der Buntheit zu wählen. Die Varianten eines Bildes mit unterschiedlichen Buntheiten enthält in der vorliegenden Untersuchung immer:
-* Faktor 1,0: Buntheit des Bildes, wie durch den Algorithmus generiert (Original rekoloriertes Bild).
-* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Beobachtern auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert.
+* Faktor 1,0: Buntheit des Bildes, wie durch den Algorithmus generiert (original rekoloriertes Bild).
+* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Versuchspersonen auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert. 0,6 wurde gewählt, da ein hinreichend wahrnehmbarer Abstand zu Faktor 1,0 in Vorversuchenbeobachtet wurde, ohne dass der Eindruck eines reinen Schwarz-Weiß-Bildes entsteht.
 * Faktor max: Basierend auf der höchsten Buntheit des gesamten original rekolorierten Bildes, der höchst mögliche Buntheitswert. Wie durch die folgende Funktion bestimmt:
 ```python
 import numpy as np
@@ -151,7 +153,7 @@ Im Ergebnis erhalten wir Buntheitsfaktoren für jedes Bild mit festen Faktoren, 
 
 ### Machine Learning Modell
 
-Zum Einsatz kommt hier ein bereits trainiertes Machine Learning Modell. Das Modell wurde durch Zhang et al. entwickelt [1]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
+Zum Einsatz kommt hier ein bereits trainiertes Machine Learning (nachfolgend ML) Modell. Das Modell wurde duch Zhang et al. entwickelt [4]. Benutzung des ML Algorithmus, wie in `code/image_generation/02_recolor/recolor.py` umgesetzt:
 
 ```python
 from colorization.colorizers import *
@@ -161,35 +163,40 @@ from colorization.colorizers import *
 out_img = postprocess_tens(tens_l_orig, colorizer(tens_l_rs).cpu())
 ```
 
-Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im Training wurde ein Bild im CIELAB Farbraum, dessen Buntheitswerte a* und b* entfernt wurden, als Eingabe für das Modell verwendet. Der Output des Modells wurde mit dem originalen Bild, samt Buntheitswerten, verglichen. Basierend auf dem Vergleich erfolgte das Training des Modells, wie in dieser Abbildung gezeigt [1]:
+Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im Training wurde ein Bild im CIELAB Farbraum, dessen Buntheitswerte a* und b* entfernt wurden, als Eingabe für das Modell verwendet. Der Output des Modells wurde mit dem originalen Bild, samt Buntheitswerten, verglichen. Basierend auf dem Vergleich erfolgte das Training des Modells, wie in dieser Abbildung gezeigt [4]:
 
 ![ML Training](img_ml_training.png)
 
 
-Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da ein Vergleich mit existierenden Buntheitswerten nicht möglich ist.
+Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da keine Buntheitswerten für einen Vergleich existieren.
 
 ## 2. Vorbereitung der Stimuli
 
 ### Auswahl der Bilder
 Es wurden historische und moderne Bilder gewählt. Dabei wurden 30 historische Bilder aus verschiedenen Quellen zusammengetragen. Das Augenmerk lag darauf, möglichst vielfältige Themen abzudecken. So sind z.B. Architektur-, Landschafts- und Portraitaufnahmen vertreten.
 
-Die modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit unter anderem diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [1]. Die Bilder wurden der Tampere Image Database 2013 entnommen [3]. Die Themen der Bilder entsprechen den verwendeten Themen der historischen Bilder.
+
+Die Modernen Bilder stellen eine kleinere Kontrollgruppe von 15 Bildern da. Mit unter anderem diesen Bildern wurde der verwendete Machine Learning Algorithmus trainiert [4]. Die modernen Bilder wurden der Tampere Image Database 2013 entnommen [5]. Die Themen der Bilder entsprechen den verwendeten Themen der historischen Bilder.
 
 ### Ablauf der Erstellung
 
 Für die Erstellung der Stimuli sind die nachfolgenden Schritte auszuführen. Alle Verweise beziehen sich auf die Ordner in `code/image_generation`. Jede Datei ist nur einmal auszuführen. Alle Bilddateien in den jeweiligen Ordnern werden jeweils abgearbeitet.
 
-* `00_base_images`: Ordner mit den ursprünglichen Bildern. Hier liegen die modernen Bilder noch als farbige Version vor.
-* `01_conversion_modern_images_to_to_bw`: Mit Ausführung von `create_bw_colors.py` werden ausschließlich die modernen Bilder aus `00_base_images/modern` in schwarz-weiße-Bilder umgewandelt. Die Bilder werden hierzu in den CIELAB-Farbraum konvertiert. Die Buntheitswerte der Bildpunkte werden im Anschluss auf 0 gesetzt. Zum Abschluss werden die Bilder im Unterordner `export` gespeichert.
+
+* `00_base_images`: Ordner mit den originalen, unveränderten Bildern. Hier liegen die modernen Bilder noch als farbige Version vor.
+* `01_conversion_modern_images_to_to_bw`: Mit Ausführung von `create_bw_colors.py` werden ausschließlich die modernen Bildern aus `00_base_images/modern` in schwarz-weiße-Bilder umgewandelt. Die Bilder werden hierzu in den CIELAB-Farbraum konvertiert. Die Buntheitswerte der Bildpunkte werden im Anschluss auf 0 gesetzt. Zum Abschluss werden die Bilder im Unterordner `export` gespeichert.
 * `02_recolor`: Zur Rekolorierung der historischen und modernen Bilder `recolor.py` ausführen. Der oben vorgestellte Machine Learning Algorithmus wird verwendet. Die resultierenden Bilder werden im Unterordner `export` gespeichert.
-* `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergehenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert. Eine Beispielübersicht mit den angewandten Faktoren für die Anpassung der Buntheit:
+* `03_modify_chroma`: Zur Generierung der unterschiedlich bunten Versionen eines Bildes aus dem vorhergenden Schritt `main.py` ausführen. Die resultierenden Bilder sowie eine individuelle Übersicht für jedes Bild werden im Ordner `04_completed_images` gespeichert. Eine Beispielübersicht mit den jeweils angewandten Faktoren für die Anpassung der Buntheit:
 
 ![Beispiel Übersicht](img_overview.png)
 
 
 ## 3. Experimentelles Design
 
-Unseren Versuch haben wir in zwei verschiedene Experimente aufgeteilt. Einmal das Hauptexperiment „Neuner“ und das Kontrollexperiment „Single“.
+Unseren Versuch haben wir in zwei verschiedene Experimente aufgeteilt.
+1. Das Hauptexperiment „Neuner“ und 
+2. das Kontrollexperiment „Single“.
+
 Die Testbilder werden mit der Python Anwendung `code/nines/generate_pictures_file.py` in die richtige Form und Größe gebracht, damit sie später bei den Versuchen benutzt werden können. Außerdem wird eine CVS Datei kreiert, welche der Neuner zur Nutzung der Bilder benötigt.
 
 ### Neuner
@@ -199,19 +206,18 @@ In unserem Hauptexperiment sehen Versuchspersonen jeweils dasselbe Bild in neun 
 
 Es wurden insgesamt 45 Bilder gezeigt. Aufgeteilt wurden diese Bilder in 30 historische und 15 moderne. Die Bilder wurden in jedem Durchlauf zufällig angeordnet, so dass die Chance minimiert wird, das Versuchspersonen beeinflusst werden durch vorherige Durchläufe.
 
-Um selbst einen Versuch durchzuführen, müssen die Bilder im Pictures Ordner inklusive der `pictures.csv` gespeichert werden. Die Anwendung `code/nines/experiment_nines.py` kann dann gestartet werden. Diese liest `pictures.csv` aus und zeigt dem User die Bilder. Außerdem werden alle Eingaben des Users gespeichert und am Ende in einer CSV Datei im results Order gespeichert. Bei einem Neustart des Experiments werden die Bildergruppen wieder zufällig aneinandergereiht.
+Um selbst einen Versuch durchzuführen, müssen die Bilder im Ordner `nines/Pictures` inklusive der `pictures.csv` gespeichert werden, die durch `generate_pictures_file.py` erstellt wurde. Die Anwendung `nines/experiment_nines.py` kann dann gestartet werden. Diese liest `pictures.csv` aus und zeigt dem User die Bilder. Außerdem werden alle Eingaben des Users gespeichert und am Ende in einer CSV Datei im results Order gespeichert. Bei einem Neustart des Experiments werden die Bildergruppen wieder zufällig aneinandergereiht.
 
 ### Single
-Bei unserem Kontrollexperiment wurde überprüft wie Bunt die Versuchspersonen das vom Algorithmus eingefärbte Bild empfinden. Hier haben wir für jede Bildergruppe lediglich ein Bild gezeigt und die Testperson sollte auf einer Skala von 0 (keine Farben) bis 9 (höchste Intensität an Buntheit) ihre Bewertung speichern.
+Bei unserem Kontrollexperiment wurde überprüft wie Bunt die Versuchspersonen das vom Algorithmus eingefärbte Bild ohne eine Veränderung der Buntheit empfinden. Hier haben wir für jede Bildergruppe lediglich ein Bild gezeigt und die Testperson sollte auf einer Skala von 0 (keine Farben) bis 9 (höchste Intensität an Buntheit) ihre Bewertung abgeben:
 
 ![Beispiel eines Bildes](single_beispiel.PNG)
 
-Die Daten, welche wir durch den Single-Versuch bekommen haben, konnten wir mit denen des Neuners kombinieren, um interessante Schlüsse für unsere Hypothese zu ziehen.
-
-Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden sollen, in den data Ordner. Die Anwendung `code/single_assessment/rating_experiment_single.py` zeigt der Testpersonen die Bilder in einer zufälligen Reihenfolge und speichert die Ergebnisse im result Order als CSV Datei.
-
+Zum Starten des Kontrollexperiments müssen die Bilder, welche bewerten werden sollen, in den Ordner `single_assessment/data`. Die Anwendung `single_assessment/rating_experiment_single.py` zeigt der Testpersonen die Bilder in einer zufälligen Reihenfolge und speichert die Ergebnisse im Order `results` als CSV Datei.
 
 ## 4. Ergebnisse
+
+Die Analyse der Ergebnisse erfolgte mittels zweier Jupyter Notebooks in `code/analysis` jeweils für beide Experiment separat.
 
 ### Neuner - Historische Bilder
 
@@ -221,7 +227,7 @@ Nachdem eine befragte Person an dem Neuner Experiment teilgenommen hat, könnte 
 
 Auf der x-Achse sind hier die Bild-IDs abgebildet und auf der y-Achse der normierte gewählte Chromafaktor.
 Bei Chromafaktor 0.0 befindet sich eine waagerechte blaue Linie. Diese symbolisiert den Chromawert, mit dem das Bild vom Algorithmus eingefärbt wurde.
-Die Punkte in dem Diagramm zeigen dann für die Antworten der Testperson.
+Die Punkte in dem Diagramm zeigen dann die Antworten der Testperson.
 
 Von uns wurden so 23 Versuchspersonen befragt und die Ergebnisse sind im folgenden Diagramm zusammengetragen.
 
@@ -273,7 +279,7 @@ Dafür wurden die normierten arithmetischen Mittel jedes Bildes benutzt und dara
 
 ![Neuner - Vergleich der Bildgruppen](niner_assessment_image_types.png)
 
-Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Testpersonen als die realistischsten wahrgenommen zu werden.
+Hier kann man deutlich erkennen, dass Versionen, die vom Algorithmus erzeugt wurden, generell zu unbunt sind, um für die Versuchspersonen als die realistischsten wahrgenommen zu werden.
 
 Ein t-Test zeigt hierbei einen signifikanten Unterschied zwischen den beiden Bildgruppen.
 
@@ -293,7 +299,7 @@ Die Regressionsanalysen wurden zwar mit sehr kleinen Stichproben durchgeführt, 
 
 ![Historische Bilder - Vergleich](historic_images_compare.png)
 
-Bei dem ersten Diagramm geht es nur um die historischen Bilder.<br/>
+Das erste Diagramm zeigt nur um die historischen Bilder.<br/>
 Auf der x-Achse sind die normierten arithmetischen Mittel der gewählten Chromawerte für jedes Bild aus dem Diagramm des Neuner-Experiments abgebildet.
 Auf der y-Achse befinden sich die arithmetischen Mittel der wahrgenommenen Buntheiten für jedes Bild aus dem Diagramm des Single-Experiments.
 Das Diagramm zeigt eine nicht signifikate, aber schwach ausgeprägte negative Korrelation mit einem Korrelationskoeffizienten von r = -0,3.<br/>
@@ -303,36 +309,36 @@ Auf dem zweiten Diagramm sieht man das noch deutlicher.
 
 ![Moderne Bilder - Vergleich](modern_images_compare.png)
 
-Bei diesem Diagramm handelt es sich um die gleiche Herangehensweise, wie bei dem Diagramm zuvor, nur das hier die historischen Bilder zur Grundlage genommen wurden.
+Bei diesem Diagramm handelt es sich um die gleiche Herangehensweise, wie bei dem Diagramm zuvor, nur das hier die modernen Bilder zur Grundlage genommen wurden.
 Hier sieht man sogar einen signifikanten negativen Zusammenhang mit einem Korrelationskoeffizienten von r = -6.
 
 ## 5. Diskussion
-Im Rahmen unseres Seminarprojekts haben die Auswertungen unserer Experimente gezeigt, dass Buntheit einen positiven Einfluss auf den wahrgenommenen Realismus hat. Anfänglich sind wir davon ausgegangen, dass wenn ein nachträglich eingefärbtes Bild bunter ist, es als realistischer wahrgenommen wird. Diese Erwartung hat sich nach den gewonnenen Erkenntnissen als wahr herausgestellt, jedoch nicht uneingeschränkt. Wir können zwar die Buntheit eines Bildes beliebig viel hochdrehen, aber ab einem bestimmten Punkt wird das Bild extrem unrealistisch, da die Farben ziemlich grell werden.
 
-Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Algorithmus [1] bunter gestalten können und sie dadurch realistischer wirken. Folglich können wir sagen, dass wir mit unserer Vorgehensweise den Algorithmus von Zhang et al., bezogen auf den wahrgenommenen Realismus, verbessern können.
+Im Rahmen unseres Seminarprojekts haben die Auswertungen unserer Experimente gezeigt, dass Buntheit einen positiven Einfluss auf den wahrgenommenen Realismus der eingefärbten Bilder hat. Anfänglich sind wir davon ausgegangen, dass ein bunteres, nachträglich eingefärbtes Bild als realistischer wahrgenommen wird. Diese Erwartung hat sich nach den gewonnenen Erkenntnissen als wahr herausgestellt, jedoch nicht uneingeschränkt. Wird die Buntheit sehr stark erhöht, zeigen sich die Farben des Bildes als grell bzw. unnatürlich. Die Versuchspersonen nahmen diese Versionen nicht mehr als realistisch wahr.
 
-
+Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Algorithmus [4] bunter gestalten können und sie dadurch als realistischer wahrgenommen werden. Folglich haben auf gezeigt, dass mit unserer Vorgehensweise der Algorithmus von Zhang et al., bezogen auf den wahrgenommenen Realismus, verbessert werden könnte.
 
 ### Mögliche Probleme 
-Es war nicht leicht die Aufgabenstellung unserer beiden Experimente kurz und genau zu erklären.
-Dies führte dazu, dass im Nachhinein manchmal eine erneute mündliche Erklärung erfolgen musste, um genau klarzustellen, wonach im Experiment gefragt wird.
-In einem Fall mussten wir die Ergebnisse des "Single" Kontrollexperiments verwerfen, da die Aufgabenstellung falsch interpretiert worden war.
-Damit solche Missverständnisse vermieden werden können, wäre es sinnvoll eine kurze Erläuterung anhand eines Beispiels zum Experiment hinzuzufügen.
 
-In unseren Bildergruppen hatten wir außerdem bekannte Persönlichkeiten, wie zum Beispiel Elvis. Es könnte sein,
-dass die Versuchsperson Elvis vorher nur in Schwarz-Weiß kannte, welches dazu führen könnte, dass sie ein etwas unbunteres Bild
-als realistischer empfindet. 
+Es hat sich gezeigt, dass es problematisch ist, den Versuchspersonen die Aufgabenstellung unserer beiden Experimente zu vermitteln. Ergebnisse einer Versuchsperson wurden teilweise verworfen, da die Aufgabenstellung nicht korrekt verstanden wurde. Damit solche Missverständnisse vermieden werden können, wäre es sinnvoll eine kurze Erläuterung anhand eines Beispiels zum Experiment hinzuzufügen, dass den Versuchspersonen vor Beginn des Experiments gezeigt wird.
+
+In den gewählten historischen Bildern sind zudem bekannte Motive vertreten. So ist zum Beispiel ein Portrait von Elvis Presley Teil der historischen Bilder. Es könnte sein,
+dass die Versuchspersonen Motive bereits in Schwarz-Weiß kannten. Es erscheint möglich, dass in solchen Fällen eine unbuntere Version des Bildes als realistischer bevorzugt wird.
+
+Die Autoren selbst waren Teil der Versuchspersonen. Eine Beeinflussung der Ergebnisse der Autoren durch vorhanderens Vorwissen kann nicht ausgeschlossen werden. Obwohl keine Ausreißer in den Ergebnissen der Autoren festgestellt wurden.
 
 ### Offene Fragen
-In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereichen eines Bildes bunter gemacht werden, als andere Bereiche.
+
+In weiterführenden Untersuchungen kann betrachtet werden, ob die Buntheitsanpassung dynamisch für einen Bildpunkt erfolgen kann. So könnte die Nachbarschaft eines Bildpunktes berücksichtigt werden und Bildpunkte in weniger bunten Bereiches eines Bild bunter gemacht werden, als andere Bereiche.
 
 ## Referenzen
-[1] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016, [doi](https://doi.org/10.1007/978-3-319-46487-9_40).
 
-[2] scikit-image development team. Besucht am 21.03.2022, https://scikit-image.org/.
+[1] Eva Lübbe. Farbempfindung, Farbbeschreibung und Farbmessung. 1. Auflage, Wiesbaden 2013.
 
-[3] Tampere Image Database. Besucht am 13.12.2021, https://www.ponomarenko.info/tid2013.htm.
+[2] Konica Minolta. Precise Color Communication. Besucht am 08.12.2021, https://www.konicaminolta.com/instruments/download/booklet/index.html.
 
-[4] Konica Minolta. Precise Color Communication. Besucht am 08.12.2021, https://www.konicaminolta.com/instruments/download/booklet/index.html.
+[3] scikit-image development team. Besucht am 21.03.2022, https://scikit-image.org/.
 
-[5] Eva Lübbe. Farbempfindung, Farbbeschreibung und Farbmessung. 1. Auflage, Wiesbaden 2013.
+[4] Zhang et al. Colorful Image Colorization, ECCV Proceedings, 2016, [doi](https://doi.org/10.1007/978-3-319-46487-9_40).
+
+[5] Tampere Image Database. Besucht am 13.12.2021, https://www.ponomarenko.info/tid2013.htm.
