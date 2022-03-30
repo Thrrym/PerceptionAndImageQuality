@@ -48,7 +48,7 @@ für jeden Bildpunkt errechnet werden. Die Buntheit eines Bildpunktes ist somit 
 
 ![CIELAB](img_lab.png)
 
-Die Abbildung zeigt, dass eine Änderung der Buntheit (Chroma in der Abb.) den  Farbton nicht beeinflusst (Hue in der Abb.).
+Die Abbildung zeigt, dass eine Änderung der Buntheit (Chroma in der Abb.) den Farbton nicht beeinflusst (Hue in der Abb.).
 
 Farbraumkonvertierungen vom sRGB zum CIELAB Farbraum und umgekehrt wurden mittels des `skimage` Pakets für Python 3 umgesetzt [3]. Beispielhaft zeigen wir die Konvertierung von sRGB zu CIELAB:
 
@@ -102,7 +102,7 @@ Die Buntheit im CIELAB Farbraum kann beliebig angepasst werden. Jedoch ist ein K
 
 Basierend auf den oben gezeigten Grenzen für die Manipulation der Buntheit sind die Faktoren für die Manipulation der Buntheit zu wählen. Die Varianten eines Bildes mit unterschiedlichen Buntheiten enthält in der vorliegenden Untersuchung immer:
 * Faktor 1,0: Buntheit des Bildes, wie durch den Algorithmus generiert (original rekoloriertes Bild).
-* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Versuchspersonen auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert. 0,6 wurde gewählt, da ein hinreichend wahrnehmbarer Abstand zu Faktor 1,0 in Vorversuchenbeobachtet wurde, ohne dass der Eindruck eines reinen Schwarz-Weiß-Bildes entsteht.
+* Faktor 0,6: Buntheit reduziert um Faktor 0,6. Hintergrund ist, dass sichergestellt wird, das den Versuchspersonen auch immer eine weniger bunte Variante gezeigt wird, als durch den Algorithmus generiert wird. Es wäre möglich, dass der Algorithmus grundsätzlich zu bunte Bilder generiert. 0,6 wurde gewählt, da ein hinreichend wahrnehmbarer Abstand zu Faktor 1,0 in Vorversuchen beobachtet wurde, ohne dass der Eindruck eines reinen Schwarz-Weiß-Bildes entsteht.
 * Faktor max: Basierend auf der höchsten Buntheit des gesamten original rekolorierten Bildes, der höchst mögliche Buntheitswert. Wie durch die folgende Funktion bestimmt:
 ```python
 import numpy as np
@@ -316,7 +316,7 @@ Hier sieht man sogar einen signifikanten negativen Zusammenhang mit einem Korrel
 
 Im Rahmen unseres Seminarprojekts haben die Auswertungen unserer Experimente gezeigt, dass Buntheit einen positiven Einfluss auf den wahrgenommenen Realismus der eingefärbten Bilder hat. Anfänglich sind wir davon ausgegangen, dass ein bunteres, nachträglich eingefärbtes Bild als realistischer wahrgenommen wird. Diese Erwartung hat sich nach den gewonnenen Erkenntnissen als wahr herausgestellt, jedoch nicht uneingeschränkt. Wird die Buntheit sehr stark erhöht, zeigen sich die Farben des Bildes als grell bzw. unnatürlich. Die Versuchspersonen nahmen diese Versionen nicht mehr als realistisch wahr.
 
-Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Algorithmus [4] bunter gestalten können und sie dadurch als realistischer wahrgenommen werden. Folglich haben auf gezeigt, dass mit unserer Vorgehensweise der Algorithmus von Zhang et al., bezogen auf den wahrgenommenen Realismus, verbessert werden könnte.
+Wir stellen fest, dass wir die rekolorierten Bilder aus dem Machine Learning Algorithmus [4] bunter gestalten können und sie dadurch als realistischer wahrgenommen werden. Folglich haben wir gezeigt, dass mit unserer Vorgehensweise der Algorithmus von Zhang et al., bezogen auf den wahrgenommenen Realismus, verbessert werden könnte.
 
 ### Mögliche Probleme 
 
@@ -325,7 +325,7 @@ Es hat sich gezeigt, dass es problematisch ist, den Versuchspersonen die Aufgabe
 In den gewählten historischen Bildern sind zudem bekannte Motive vertreten. So ist zum Beispiel ein Portrait von Elvis Presley Teil der historischen Bilder. Es könnte sein,
 dass die Versuchspersonen Motive bereits in Schwarz-Weiß kannten. Es erscheint möglich, dass in solchen Fällen eine unbuntere Version des Bildes als realistischer bevorzugt wird.
 
-Die Autoren selbst waren Teil der Versuchspersonen. Eine Beeinflussung der Ergebnisse der Autoren durch vorhanderens Vorwissen kann nicht ausgeschlossen werden. Obwohl keine Ausreißer in den Ergebnissen der Autoren festgestellt wurden.
+Die Autoren selbst waren Teil der Versuchspersonen. Eine Beeinflussung der Ergebnisse der Autoren durch vorhandenes Vorwissen kann nicht ausgeschlossen werden. Obwohl keine Ausreißer in den Ergebnissen der Autoren festgestellt wurden.
 
 ### Offene Fragen
 
