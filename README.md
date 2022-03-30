@@ -168,7 +168,7 @@ Zu beachten ist, dass das Modell nur mittels moderner Bilder trainiert wurde. Im
 ![ML Training](img_ml_training.png)
 
 
-Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da keine Buntheitswerten für einen Vergleich existieren.
+Mit dieser Methode ist es nicht möglich das Modell mit den historischen Bildern zu trainieren, da keine Buntheitswerte für einen Vergleich existieren.
 
 ## 2. Vorbereitung der Stimuli
 
