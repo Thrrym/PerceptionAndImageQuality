@@ -16,7 +16,6 @@ colorization/
 
 image_generation/02_recolor/export
 image_generation/01_conversion_modern_images_to_bw/export
-00_base_images/
 
 image_generation/04_completed_images/*.BMP/
 
